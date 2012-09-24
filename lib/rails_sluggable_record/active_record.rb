@@ -1,0 +1,118 @@
+module RailsSluggableRecord
+  module ActiveRecord
+    module NonSluggableMethods
+      
+      def sluggable?
+        defined? @slug
+      end      
+      
+      def slug(*args)
+        unless args.empty?
+          unless sluggable?     
+            include RailsSluggableRecord::ActiveRecord::SluggableMethods 
+            if respond_to? :translatable? and translatable?   
+              include RailsSluggableRecord::ActiveRecord::I18nMethods                
+              has_many :slugs, :autosave => true, :dependent => :destroy, :as => :sluggable
+              after_save :generate_slugs          
+            else    
+              include RailsSluggableRecord::ActiveRecord::NonI18nMethods               
+              after_validation :generate_slug       
+              validate :slug, :uniquess => true                   
+            end                                
+          end
+          @slug = args.size == 1 ? args[0] : args
+        end
+        @slug
+      end    
+    
+    end   
+    module SluggableMethods
+      
+      def self.included(base)
+        base.instance_eval do 
+          def find(id)
+            id.to_i == 0 ? find_by_slug(id) : super  
+          end   
+        end        
+      end
+      
+      def to_param
+        slug
+      end   
+      
+    end
+    module I18nMethods
+      
+      def self.included(base)
+        base.instance_eval do
+          def find_by_slug(id)
+            joins(:slugs).where(:slugs => {:param => 'age'}).first
+          end          
+        end
+      end
+      
+      def slug
+        l = defined?(@slug_late) ? @slug_late[current_locale] : nil
+        return l unless l.nil?
+        s = slugs.find_by_locale(current_locale)
+        s ? s.send(:param) : nil       
+      end
+      
+      def slug=(value)
+        s = slugs.find_by_locale(current_locale)
+        s ? s.send(:param=, value) : slug_late(current_locale, value)      
+      end
+      
+      protected
+      
+      def slug_late(locale, value)
+        if defined? @slug_late
+          @slug_late[locale] = value
+        else
+          @slug_late = {locale => value}
+        end
+      end
+      
+      def generate_slugs
+        value = self.class.slug
+        case value
+        when Symbol        
+          param = proc { send(value) }
+        when Array        
+          param = proc { value.each.map{|p|send(p)}.join(' ') }      
+        when Proc            
+          param = proc { value.call(self) }
+        end        
+        I18n.available_locales.each do |locale|
+          with_locale locale       
+          param = (defined?(@slug_late) and @slug_late[locale].present?) ? @slug_late[locale] : param.call.parameterize
+          if s = slugs.find_by_locale(locale)
+            s.update_attributes :param => param
+          else
+            slugs.create :param => param, :locale => locale.to_s   
+          end         
+        end             
+      end
+      
+    end  
+    module NonI18nMethods
+      
+      def generate_slug
+        if slug.nil? or not slug_changed?
+          value = self.class.slug
+          case value
+          when Symbol      
+            self.slug = send(value).parameterize
+          when Array                     
+            self.slug = value.each.map{|p|send(p)}.join(' ').parameterize     
+          when Proc                       
+            self.slug = value.call(self).parameterize
+          end     
+        end
+      end
+      
+    end      
+  end
+end
+
+ActiveRecord::Base.send :extend, RailsSluggableRecord::ActiveRecord::NonSluggableMethods
