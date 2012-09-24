@@ -74,22 +74,22 @@ module RailsSluggableRecord
       end
       
       def generate_slugs
-        value = self.class.slug
-        case value
+        option = self.class.slug
+        case option
         when Symbol        
-          param = proc { send(value) }
+          param = proc { send(option) }
         when Array        
-          param = proc { value.each.map{|p|send(p)}.join(' ') }      
+          param = proc { option.each.map{|p|send(p)}.join(' ') }      
         when Proc            
-          param = proc { value.call(self) }
+          param = proc { option.call(self) }
         end        
         I18n.available_locales.each do |locale|
           with_locale locale       
-          param = (defined?(@slug_late) and @slug_late[locale].present?) ? @slug_late[locale] : param.call.parameterize
+          param_value = (defined?(@slug_late) and @slug_late[locale].present?) ? @slug_late[locale] : param.call.parameterize
           if s = slugs.find_by_locale(locale)
-            s.update_attributes :param => param
+            s.update_attributes :param => param_value
           else
-            slugs.create :param => param, :locale => locale.to_s   
+            slugs.create :param => param_value, :locale => locale.to_s
           end         
         end             
       end
@@ -99,14 +99,14 @@ module RailsSluggableRecord
       
       def generate_slug
         if slug.nil? or not slug_changed?
-          value = self.class.slug
+          option = self.class.slug
           case value
           when Symbol      
-            self.slug = send(value).parameterize
+            self.slug = send(option).parameterize
           when Array                     
-            self.slug = value.each.map{|p|send(p)}.join(' ').parameterize     
+            self.slug = option.each.map{|p|send(p)}.join(' ').parameterize     
           when Proc                       
-            self.slug = value.call(self).parameterize
+            self.slug = option.call(self).parameterize
           end     
         end
       end
