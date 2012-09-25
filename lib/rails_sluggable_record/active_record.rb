@@ -9,7 +9,7 @@ module RailsSluggableRecord
       def slug(*args)
         unless args.empty?
           unless sluggable?     
-            include RailsSluggableRecord::ActiveRecord::SluggableMethods 
+            include RailsSluggableRecord::ActiveRecord::SluggableMethods
             if respond_to? :translatable? and translatable?   
               include RailsSluggableRecord::ActiveRecord::I18nMethods                
               has_many :slugs, :autosave => true, :dependent => :destroy, :as => :sluggable
@@ -29,25 +29,37 @@ module RailsSluggableRecord
     module SluggableMethods
       
       def self.included(base)
-        base.instance_eval do 
-          def find(id)
-            id.to_i == 0 ? find_by_slug(id) : super  
+        ::ActiveRecord::Relation.class_eval do
+       
+          def find_one(id)
+            (id.is_a?(String) and id.to_i != id) ? find_by_slug(id) : super  
           end   
-        end        
+
+          def exists?(id)
+            (id.is_a?(String) and id.to_i != id) ? exists_by_slug(id) : super
+          end       
+          
+        end
       end
       
       def to_param
         slug
       end   
       
-    end
+    end     
     module I18nMethods
       
       def self.included(base)
         base.instance_eval do
+          
           def find_by_slug(id)
             includes(:slugs).where(:slugs => {:param => id}).first
-          end          
+          end
+          
+          def exists_by_slug(id)
+            joins(:slugs).exists?(:slugs => {:param => id})
+          end
+                    
         end
       end
       
@@ -97,10 +109,22 @@ module RailsSluggableRecord
     end  
     module NonI18nMethods
       
+      def self.included(base)
+        base.instance_eval do      
+      
+          def exists_by_slug(id)
+            exists? :slug => id
+          end  
+           
+        end
+      end
+      
+      protected   
+      
       def generate_slug
         if slug.nil? or not slug_changed?
           option = self.class.slug
-          case value
+          case option
           when Symbol      
             self.slug = send(option).parameterize
           when Array                     
