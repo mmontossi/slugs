@@ -13,10 +13,10 @@ module RailsSluggableRecord
             if respond_to? :translatable? and translatable?   
               include RailsSluggableRecord::ActiveRecord::I18nMethods                
               has_many :slugs, :autosave => true, :dependent => :destroy, :as => :sluggable
-              after_save :generate_slugs          
+              after_commit :generate_slugs          
             else    
               include RailsSluggableRecord::ActiveRecord::NonI18nMethods               
-              after_validation :generate_slug       
+              before_validation :generate_slug       
               validate :slug, :uniquess => true                   
             end                                
           end
