@@ -35,7 +35,7 @@ module RailsSluggableRecord
             (id.is_a?(String) and id.to_i != id) ? find_by_slug(id) : super  
           end   
 
-          def exists?(id)
+          def exists?(id = false)
             (id.is_a?(String) and id.to_i != id) ? exists_by_slug(id) : super
           end       
           
