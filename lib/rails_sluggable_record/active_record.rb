@@ -53,11 +53,11 @@ module RailsSluggableRecord
         base.instance_eval do
           
           def find_by_slug(id)
-            includes(:slugs).where(:slugs => {:param => id}).first
+            includes(:slugs).where(:slugs => {:param => id, :locale => I18n.locale}).first
           end
           
           def exists_by_slug(id)
-            joins(:slugs).exists?(:slugs => {:param => id})
+            joins(:slugs).exists?(:slugs => {:param => id, :locale => I18n.locale})
           end
                     
         end
