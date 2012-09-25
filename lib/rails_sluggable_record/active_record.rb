@@ -46,7 +46,7 @@ module RailsSluggableRecord
       def self.included(base)
         base.instance_eval do
           def find_by_slug(id)
-            joins(:slugs).where(:slugs => {:param => 'age'}).first
+            joins(:slugs).where(:slugs => {:param => id}).first
           end          
         end
       end
