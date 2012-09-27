@@ -96,7 +96,8 @@ module RailsSluggableRecord
       def generate_slugs
         locale = current_locale
         I18n.available_locales.each do |locale|
-          with_locale locale       
+          I18n.locale = locale    
+          with_locale locale   
           current_slug = slugs.find{|s| s.locale==locale.to_s}
           current_slug = slugs.find_by_locale(locale) unless current_slug
           if current_slug
@@ -105,6 +106,7 @@ module RailsSluggableRecord
             slugs.build(:param => slug_value, :locale => locale.to_s)
           end
         end
+        I18n.locale = locale
         with_locale locale
       end
       
