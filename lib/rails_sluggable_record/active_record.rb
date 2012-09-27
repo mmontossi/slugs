@@ -11,9 +11,9 @@ module RailsSluggableRecord
           unless sluggable?     
             include RailsSluggableRecord::ActiveRecord::SluggableMethods
             if respond_to? :translatable? and translatable?   
-              include RailsSluggableRecord::ActiveRecord::I18nMethods                
-              has_many :slugs, :autosave => true, :dependent => :destroy, :as => :sluggable
-              after_commit :generate_slugs          
+              include RailsSluggableRecord::ActiveRecord::I18nMethods    
+              has_many :slugs, :autosave => true, :dependent => :destroy, :as => :sluggable                          
+              before_validation :generate_slugs                      
             else    
               include RailsSluggableRecord::ActiveRecord::NonI18nMethods               
               before_validation :generate_slug       
@@ -64,28 +64,23 @@ module RailsSluggableRecord
       end
       
       def slug
-        l = defined?(@slug_late) ? @slug_late[current_locale] : nil
-        return l unless l.nil?
-        s = slugs.find_by_locale(current_locale)
+        s = slug_by_locale(current_locale)
         s ? s.send(:param) : nil       
       end
       
       def slug=(value)
-        s = slugs.find_by_locale(current_locale)
-        s ? s.send(:param=, value) : slug_late(current_locale, value)      
+        s = slug_by_locale(current_locale)
+        s ? s.send(:param=, value) : slugs.build(:locale => current_locale, :param => value)      
       end
       
       protected
       
-      def slug_late(locale, value)
-        if defined? @slug_late
-          @slug_late[locale] = value
-        else
-          @slug_late = {locale => value}
-        end
+      def slug_by_locale(locale)
+        s = slugs.find { |s| s.locale == locale.to_s }
+        s ? s : slugs.find_by_locale(locale)
       end
       
-      def generate_slugs
+      def slug_value
         option = self.class.slug
         case option
         when Symbol        
@@ -95,15 +90,22 @@ module RailsSluggableRecord
         when Proc            
           param = proc { option.call(self) }
         end        
+        param.call.parameterize
+      end
+      
+      def generate_slugs
+        locale = current_locale
         I18n.available_locales.each do |locale|
           with_locale locale       
-          param_value = (defined?(@slug_late) and @slug_late[locale].present?) ? @slug_late[locale] : param.call.parameterize
-          if s = slugs.find_by_locale(locale)
-            s.update_attributes :param => param_value
+          current_slug = slugs.find{|s| s.locale==locale.to_s}
+          current_slug = slugs.find_by_locale(locale) unless current_slug
+          if current_slug
+            current_slug.param = slug_value
           else
-            slugs.create :param => param_value, :locale => locale.to_s
-          end         
-        end             
+            slugs.build(:param => slug_value, :locale => locale.to_s)
+          end
+        end
+        with_locale locale
       end
       
     end  
