@@ -43,7 +43,7 @@ module RailsSlugs
       end
       
       def to_param
-        slug
+        self.slug
       end   
       
     end     
