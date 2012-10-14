@@ -1,6 +1,6 @@
 = Rails Slugs
 
-Inspired in friendly_id but more minimalistic
+Inspired in friendly_id but more minimalistic.
 
 = Install
 
