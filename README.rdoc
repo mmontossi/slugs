@@ -14,11 +14,11 @@ Then bundle:
 
 Just call slug method in your models...
 
-If you want to make the slug the value of one field:
+If you want to use the value of one field:
   slug :prop
   
-To concatenate multiple the value of multiple fields:
+To concatenate multiple fields:
   slug :prop1, :prop2, :prop3
   
-If you need a very custom slug:
+Or if you need a very custom slug:
   slug proc { |record| "#{record.prop}-custom" }
