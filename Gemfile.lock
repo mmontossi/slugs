@@ -1,6 +1,6 @@
 GIT
   remote: git@github.com:mattways/rails-i18n-record.git
-  revision: f58308611e2a6043423534917ad395ecdb700849
+  revision: 551414763b52a0e40e158d17332ee8c9ab8cb4fc
   specs:
     rails-i18n-record (1.0.0)
       rails (~> 3.2.8)
@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    rails-slugs (0.0.1)
+    rails-slugs (1.0.0)
       rails (~> 3.2.8)
 
 GEM

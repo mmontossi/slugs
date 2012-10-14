@@ -54,11 +54,11 @@ module RailsSlugs
         base.instance_eval do
           
           def find_by_slug(id)
-            includes(:translations).where(:translations => {:slug => id, :locale => I18n.locale}).first
+            includes(:translations).where(translation_table => {:slug => id, :locale => I18n.locale}).first
           end
           
           def exists_by_slug(id)
-            joins(:translations).exists?(:translations => {:slug => id, :locale => I18n.locale})
+            joins(:translations).exists?(translation_table => {:slug => id, :locale => I18n.locale})
           end
                     
         end
