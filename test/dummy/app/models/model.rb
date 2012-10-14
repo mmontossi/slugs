@@ -1,6 +1,6 @@
 class Model < ActiveRecord::Base 
   
-  attr_accessible :name, :age
+  attr_accessible :name, :age, :slug
   
   slug :name
   

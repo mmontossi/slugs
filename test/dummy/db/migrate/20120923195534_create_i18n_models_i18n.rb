@@ -4,6 +4,8 @@ class CreateI18nModelsI18n < ActiveRecord::Migration
       t.integer :i18n_model_id, :null => false
       t.string :locale, :null => false        
       t.string :name, :null => false
+      t.integer :age, :null => false
+      t.string :slug, :null => false
       t.timestamps 
     end
     add_index :i18n_models_i18n, :i18n_model_id

@@ -1,4 +1,4 @@
 # desc "Explaining what the task does"
-# task :rails_sluggable_record do
+# task :rails_slugs do
 #   # Task goes here
 # end

@@ -1,3 +1,24 @@
-= RailsSluggableRecord
+= Rails Slugs
 
-This project rocks and uses MIT-LICENSE.
+Inspired in friendly_id but more minimalistic
+
+= Install
+
+Put this line in your Gemfile:
+  gem 'rails-slugs', :git => 'git@github.com:mattways/rails-slugs.git'
+  
+Then bundle:
+  $ bundle
+  
+= Usage
+
+Just call slug method in your models...
+
+If you want to make the slug the value of one field:
+  slug :prop
+  
+To concatenate multiple the value of multiple fields:
+  slug :prop1, :prop2, :prop3
+  
+If you need a very custom slug:
+  slug proc { |record| "#{record.prop}-custom" }
