@@ -11,7 +11,8 @@ module RailsSlugs
           unless sluggable?     
             include RailsSlugs::ActiveRecord::SluggableMethods
             if respond_to? :translatable? and translatable?   
-              include RailsSlugs::ActiveRecord::I18nMethods 
+              include RailsSlugs::ActiveRecord::I18nMethods
+              attr_translatable :slug 
               before_validation :generate_slugs   
               validate :slug, :uniquess => true, :scope => :locale                    
             else    
@@ -43,7 +44,7 @@ module RailsSlugs
       end
       
       def to_param
-        self.slug
+        slug
       end   
       
     end     
