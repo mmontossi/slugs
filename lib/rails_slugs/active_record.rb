@@ -59,7 +59,7 @@ module RailsSlugs
               "INNER JOIN #{t.table_name} t ON t.#{t.foreign_key} = #{table_name}.#{t.active_record_primary_key}"
             ).where(
               "t.slug = '#{id}' AND t.locale = '#{I18n.locale.to_s}'"
-            ).first
+            ).readonly(false).first
           end
           
           def exists_by_slug(id)
