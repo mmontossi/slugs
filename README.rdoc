@@ -5,7 +5,7 @@ Inspired in friendly_id but more minimalistic.
 = Install
 
 Put this line in your Gemfile:
-  gem 'rails-slugs', :git => 'git@github.com:mattways/rails-slugs.git'
+  gem 'rails-slugs'
   
 Then bundle:
   $ bundle
