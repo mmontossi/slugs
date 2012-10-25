@@ -12,7 +12,15 @@ Then bundle:
   
 = Usage
 
-Just call slug method in your models...
+Add the column in your migration:
+  t.string :slug
+  
+(If you are using rails-i18n-record you need to place the column in the translation table, this has been done this way because it's easier to maintain and your queries will be faster avoiding extra joins)
+
+Update your db:
+  rake db:migrate
+
+Call the slug method in your model:
 
 If you want to use the value of one field:
   slug :prop
