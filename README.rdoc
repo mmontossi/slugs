@@ -1,4 +1,4 @@
-{<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/mattways/rails-slugs] {<img src="https://secure.travis-ci.org/mattways/rails-slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mattways/rails-slugs]
+{<img src="https://codeclimate.com/badge.png" />}[https://codeclimate.com/github/mattways/rails-slugs] {<img src="https://secure.travis-ci.org/mattways/rails-slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mattways/rails-slugs] {<img src="https://gemnasium.com/mattways/rails-slugs.png" alt="Dependency Status" />}[https://gemnasium.com/mattways/rails-slugs]
 
 = Rails Slugs
 
