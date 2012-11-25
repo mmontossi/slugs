@@ -46,38 +46,12 @@ module RailsSlugs
       def to_param
         slug
       end   
-      
-    end     
-    module I18nMethods
-      
-      def self.included(base)
-        base.instance_eval do
-          
-          def find_by_slug(id)
-            t = reflections[:translations]
-            joins(
-              "INNER JOIN #{t.table_name} t ON t.#{t.foreign_key} = #{table_name}.#{t.active_record_primary_key}"
-            ).where(
-              "t.slug = '#{id}' AND t.locale = '#{I18n.locale.to_s}'"
-            ).readonly(false).first
-          end
-          
-          def exists_by_slug(id)
-            t = reflections[:translations]
-            joins(:translations).exists?(t.table_name.to_sym => {:slug => id, :locale => I18n.locale})
-          end
-                    
-        end
-      end
-      
+
       protected
-      
-      def generate_slugs
-        options = self.class.slug     
-        locale = current_locale
-        I18n.available_locales.each do |locale|
-          I18n.locale = locale    
-          with_locale locale   
+
+      def assign_slug
+        if slug.nil? or not slug_changed?  
+          options = self.class.slug
           case options
           when Symbol      
             self.slug = send(options).parameterize
@@ -87,8 +61,45 @@ module RailsSlugs
             self.slug = options.call(self).parameterize
           end
         end
-        I18n.locale = locale
+      end
+
+    end     
+    module I18nMethods
+      
+      def self.included(base)
+        base.instance_eval do
+          
+          def find_by_slug(id)
+            t = reflect_on_association(:translations)
+            joins(
+              "INNER JOIN #{t.table_name} t ON t.#{t.foreign_key} = #{table_name}.#{t.active_record_primary_key}"
+            ).where(
+              "t.slug = '#{id}' AND t.locale = '#{I18n.locale.to_s}'"
+            ).readonly(false).first
+          end
+          
+          def exists_by_slug(id)
+            t = reflect_on_association(:translations)
+            joins(:translations).exists?(t.table_name.to_sym => {:slug => id, :locale => I18n.locale})
+          end
+                    
+        end
+      end
+      
+      protected
+
+      def change_locale(locale)
+        I18n.locale = locale    
         with_locale locale
+      end
+
+      def generate_slugs
+        locale = current_locale
+        I18n.available_locales.each do |locale|
+          change_locale locale
+          assign_slug
+        end
+        change_locale locale
       end
       
     end  
@@ -107,17 +118,7 @@ module RailsSlugs
       protected   
       
       def generate_slug
-        if slug.nil? or not slug_changed?
-          options = self.class.slug
-          case options
-          when Symbol      
-            self.slug = send(options).parameterize
-          when Array                     
-            self.slug = options.each.map{|p|send(p)}.join(' ').parameterize     
-          when Proc                       
-            self.slug = options.call(self).parameterize
-          end     
-        end
+        assign_slug
       end
       
     end      

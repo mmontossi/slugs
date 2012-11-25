@@ -13,31 +13,31 @@
 
 ActiveRecord::Schema.define(:version => 20120924010158) do
 
-  create_table "i18n_models", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "i18n_models_i18n", :force => true do |t|
-    t.integer  "i18n_model_id", :null => false
-    t.string   "locale",        :null => false
-    t.string   "name",          :null => false
-    t.integer  "age",           :null => false
-    t.string   "slug",          :null => false
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
-  end
-
-  add_index "i18n_models_i18n", ["created_at"], :name => "index_i18n_models_i18n_on_created_at"
-  add_index "i18n_models_i18n", ["i18n_model_id"], :name => "index_i18n_models_i18n_on_i18n_model_id"
-  add_index "i18n_models_i18n", ["locale"], :name => "index_i18n_models_i18n_on_locale"
-  add_index "i18n_models_i18n", ["name"], :name => "index_i18n_models_i18n_on_name"
-  add_index "i18n_models_i18n", ["updated_at"], :name => "index_i18n_models_i18n_on_updated_at"
-
-  create_table "models", :force => true do |t|
+  create_table "simples", :force => true do |t|
     t.string  "name"
     t.integer "age"
     t.string  "slug"
   end
+
+  create_table "translatables", :force => true do |t|
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "translatables_i18n", :force => true do |t|
+    t.integer  "translatable_id", :null => false
+    t.string   "locale",          :null => false
+    t.string   "name",            :null => false
+    t.integer  "age",             :null => false
+    t.string   "slug",            :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+  end
+
+  add_index "translatables_i18n", ["created_at"], :name => "index_translatables_i18n_on_created_at"
+  add_index "translatables_i18n", ["locale"], :name => "index_translatables_i18n_on_locale"
+  add_index "translatables_i18n", ["name"], :name => "index_translatables_i18n_on_name"
+  add_index "translatables_i18n", ["translatable_id"], :name => "index_translatables_i18n_on_translatable_id"
+  add_index "translatables_i18n", ["updated_at"], :name => "index_translatables_i18n_on_updated_at"
 
 end

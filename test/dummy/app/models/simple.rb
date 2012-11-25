@@ -1,4 +1,4 @@
-class Model < ActiveRecord::Base 
+class Simple < ActiveRecord::Base 
   
   attr_accessible :name, :age, :slug
   
