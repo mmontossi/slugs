@@ -18,5 +18,6 @@ Gem::Specification.new do |s|
 
   s.add_dependency "rails", "~> 3.2.8"
 
-  s.add_development_dependency RUBY_PLATFORM == 'java' ? "jdbc-sqlite3" : "sqlite3"
+  s.add_development_dependency "sqlite3"
+  s.add_development_dependency "jdbc-sqlite3" if RUBY_PLATFORM == 'java'  
 end
