@@ -13,7 +13,7 @@ gem "jquery-rails"
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem 'rails-i18n-record'
+gem 'rails-i18n-record', '>= 1.0.1'
 
 # To use debugger
 # gem 'debugger'
