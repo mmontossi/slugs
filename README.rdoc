@@ -27,7 +27,7 @@ Call the slug method in your model:
 If you want to use the value of one field:
   slug :prop
   
-To concatenate multiple fields:
+To concatenate the value of multiple fields:
   slug :prop1, :prop2, :prop3
   
 Or if you need a very custom slug:
