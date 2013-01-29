@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120924010158) do
+ActiveRecord::Schema.define(:version => 20130128234241) do
 
   create_table "simples", :force => true do |t|
     t.string  "name"
@@ -20,24 +20,19 @@ ActiveRecord::Schema.define(:version => 20120924010158) do
   end
 
   create_table "translatables", :force => true do |t|
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string "dummy"
   end
 
   create_table "translatables_i18n", :force => true do |t|
-    t.integer  "translatable_id", :null => false
-    t.string   "locale",          :null => false
-    t.string   "name",            :null => false
-    t.integer  "age",             :null => false
-    t.string   "slug",            :null => false
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.integer "translatable_id", :null => false
+    t.string  "locale",          :null => false
+    t.string  "name",            :null => false
+    t.integer "age",             :null => false
+    t.string  "slug",            :null => false
   end
 
-  add_index "translatables_i18n", ["created_at"], :name => "index_translatables_i18n_on_created_at"
-  add_index "translatables_i18n", ["locale"], :name => "index_translatables_i18n_on_locale"
-  add_index "translatables_i18n", ["name"], :name => "index_translatables_i18n_on_name"
-  add_index "translatables_i18n", ["translatable_id"], :name => "index_translatables_i18n_on_translatable_id"
-  add_index "translatables_i18n", ["updated_at"], :name => "index_translatables_i18n_on_updated_at"
+  create_table "withouts", :force => true do |t|
+    t.string "name"
+  end
 
 end

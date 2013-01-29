@@ -33,11 +33,11 @@ module RailsSlugs
         ::ActiveRecord::Relation.class_eval do
        
           def find_one(id)
-            (id.is_a?(String) and id.to_i != id) ? find_by_slug(id) : super  
+            (id.is_a?(String) and !id.match(/^\d+$/)) ? find_by_slug(id) : super
           end   
 
           def exists?(id = false)
-            (id.is_a?(String) and id.to_i != id) ? exists_by_slug(id) : super
+            (id.is_a?(String) and !id.match(/^\d+$/)) ? exists_by_slug(id) : super
           end       
           
         end

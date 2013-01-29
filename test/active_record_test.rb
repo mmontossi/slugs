@@ -4,28 +4,41 @@ class ActiveRecordTest < ActiveSupport::TestCase
   
   setup :create_records
 
+  test 'should not break without models' do
+    assert_equal 'name', @without.name
+    assert_equal @without, Without.find('1')
+    assert_equal @without, Without.find(1)
+  end
+
   test 'shoud create slug' do
-    assert_equal @simple.slug, 'name'
-    assert_equal @translatable.slug, 'translatable-name'
+    assert_equal 'name', @simple.slug
+    assert_equal @simple, Simple.find('name')
+    assert_equal 'translatable-name', @translatable.slug
+    assert_equal @translatable, Translatable.find('translatable-name')
   end
 
   test 'should edit slug' do
     @simple.update_attributes :name => 'new name'
-    assert_equal @simple.slug, 'new-name'
+    assert_equal 'new-name', @simple.slug
+    assert_equal @simple, Simple.find('new-name')
     @translatable.update_attributes :name => 'new translatable name'
-    assert_equal @translatable.slug, 'new-translatable-name'
+    assert_equal 'new-translatable-name', @translatable.slug
+    assert_equal @translatable, Translatable.find('new-translatable-name')
   end
 
   test 'should not alter direct assigned slug' do
     @simple.update_attributes :slug => 'direct slug'
-    assert_equal @simple.slug, 'direct slug'
+    assert_equal 'direct slug', @simple.slug
+    assert_equal @simple, Simple.find('direct slug')
     @translatable.update_attributes :slug => 'translatable direct slug'
-    assert_equal @translatable.slug, 'translatable direct slug'
+    assert_equal 'translatable direct slug', @translatable.slug
+    assert_equal @translatable, Translatable.find('translatable direct slug')
   end
 
   protected
 
   def create_records
+    @without = Without.create(:name => 'name')
     @simple = Simple.create(:name => 'name', :age => 14)
     @translatable = Translatable.create(:name => 'translatable name', :age => 20)
   end
