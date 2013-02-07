@@ -7,8 +7,8 @@ module RailsSlugs
       end      
       
       def slug(*args)
-        unless args.empty?
-          unless sluggable?     
+        if args.any?
+          unless sluggable?
             include RailsSlugs::ActiveRecord::SluggableMethods
             if respond_to? :translatable? and translatable?   
               include RailsSlugs::ActiveRecord::I18nMethods
@@ -19,29 +19,28 @@ module RailsSlugs
               include RailsSlugs::ActiveRecord::NonI18nMethods               
               before_validation :generate_slug       
               validate :slug, :uniquess => true                   
-            end                                
+            end
+            @slug = args.size == 1 ? args[0] : args                              
           end
-          @slug = args.size == 1 ? args[0] : args
         end
         @slug
       end    
     
-    end   
-    module SluggableMethods  
-      
-      def self.included(base)
-        ::ActiveRecord::Relation.class_eval do
-       
-          def find_one(id)
-            (id.is_a?(String) and !id.match(/^\d+$/)) ? find_by_slug(id) : super
-          end   
+    end
+    module RelationMethods
 
-          def exists?(id = false)
-            (id.is_a?(String) and !id.match(/^\d+$/)) ? exists_by_slug(id) : super
-          end       
-          
-        end
-      end
+      def find_one(id)
+        r = (sluggable? and id.is_a? String) ? find_by_slug(id) : nil
+        r ? r : super
+      end   
+
+      def exists?(id = false)
+        r = (sluggable? and id.is_a? String) ? exists_by_slug(id) : nil
+        r ? r : super
+      end     
+
+    end
+    module SluggableMethods  
       
       def to_param
         slug
@@ -125,4 +124,5 @@ module RailsSlugs
   end
 end
 
+ActiveRecord::Relation.send :include, RailsSlugs::ActiveRecord::RelationMethods
 ActiveRecord::Base.send :extend, RailsSlugs::ActiveRecord::NonSluggableMethods
