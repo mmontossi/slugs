@@ -35,6 +35,15 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal @translatable, Translatable.find('translatable direct slug')
   end
 
+  test 'should assign index for same slugs' do
+    first = Simple.create(:name => 'same', :age => 34)
+    assert_equal 'same', first.slug
+    second = Simple.create(:name => 'same', :age => 45)
+    assert_equal 'same-1', second.slug
+    third = Simple.create(:name => 'same', :age => 234)
+    assert_equal 'same-2', third.slug
+  end
+
   protected
 
   def create_records
