@@ -1,4 +1,4 @@
-require 'rails_slugs/active_record'
+require 'rails/slugs'
 
-module RailsSlugs
+module Rails
 end
