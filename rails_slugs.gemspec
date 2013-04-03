@@ -1,12 +1,12 @@
 $:.push File.expand_path('../lib', __FILE__)
 
 # Maintain your gem's version:
-require 'rails_slugs/version'
+require 'rails/slugs/version'
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name        = 'rails-slugs'
-  s.version     = RailsSlugs::VERSION
+  s.version     = Rails::Slugs::VERSION
   s.authors     = ['Mattways']
   s.email       = ['contact@mattways.com']
   s.homepage    = 'https://github.com/mattways/rails-slugs'
