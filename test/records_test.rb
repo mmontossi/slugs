@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class ActiveRecordTest < ActiveSupport::TestCase
+class RecordsTest < ActiveSupport::TestCase
   
   setup :create_records
 
