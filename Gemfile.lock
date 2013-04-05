@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    rails-slugs (1.0.6)
+    rails_slugs (1.0.7)
       rails (>= 3.2.8)
 
 GEM
@@ -67,7 +67,7 @@ GEM
       activesupport (= 3.2.13)
       bundler (~> 1.0)
       railties (= 3.2.13)
-    rails-i18n-record (1.0.2)
+    rails_i18n_record (1.0.4)
       rails (>= 3.2.8)
     railties (3.2.13)
       actionpack (= 3.2.13)
@@ -98,6 +98,6 @@ PLATFORMS
 
 DEPENDENCIES
   jquery-rails
-  rails-i18n-record (>= 1.0.1)
-  rails-slugs!
+  rails_i18n_record
+  rails_slugs!
   sqlite3

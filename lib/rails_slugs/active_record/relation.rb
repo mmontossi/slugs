@@ -1,5 +1,5 @@
-module Rails
-  module Slugs
+module RailsSlugs
+  module ActiveRecord
     module Relation
 
       def find_one(id)

@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-# Declare your gem's dependencies in rails_sluggable_record.gemspec.
+# Declare your gem's dependencies in rails_slugs.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
 # development dependencies will be added by default to the :development group.
 gemspec
@@ -13,7 +13,7 @@ gem 'jquery-rails'
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
-gem 'rails-i18n-record', '>= 1.0.1'
+gem 'rails_i18n_record' # s.add_development_dependency seems to not work
 
 # To use debugger
 # gem 'debugger'
