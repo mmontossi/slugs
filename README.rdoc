@@ -2,7 +2,7 @@
 
 ---
 
-{<img src="https://codeclimate.com/github/mattways/rails-slugs.png" />}[https://codeclimate.com/github/mattways/rails-slugs] {<img src="https://secure.travis-ci.org/mattways/rails-slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mattways/rails-slugs] {<img src="https://gemnasium.com/mattways/rails-slugs.png" alt="Dependency Status" />}[https://gemnasium.com/mattways/rails-slugs]
+{<img src="https://codeclimate.com/github/mattways/rails_slugs.png" />}[https://codeclimate.com/github/mattways/rails_slugs] {<img src="https://secure.travis-ci.org/mattways/rails_slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mattways/rails_slugs] {<img src="https://gemnasium.com/mattways/rails_slugs.png" alt="Dependency Status" />}[https://gemnasium.com/mattways/rails_slugs]
 
 = Rails Slugs
 
@@ -11,7 +11,7 @@ Inspired in friendly_id but more minimalistic.
 = Install
 
 Put this line in your Gemfile:
-  gem 'rails-slugs'
+  gem 'rails_slugs'
   
 Then bundle:
   $ bundle
