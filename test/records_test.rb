@@ -4,20 +4,20 @@ class RecordsTest < ActiveSupport::TestCase
   
   setup :create_records
 
-  test 'should not break without models' do
+  test "should not break without models" do
     assert_equal 'name', @without.name
     assert_equal @without, Without.find('1')
     assert_equal @without, Without.find(1)
   end
 
-  test 'shoud create slug' do
+  test "shoud create slug" do
     assert_equal 'name', @simple.slug
     assert_equal @simple, Simple.find('name')
     assert_equal 'translatable-name', @translatable.slug
     assert_equal @translatable, Translatable.find('translatable-name')
   end
 
-  test 'should edit slug' do
+  test "should edit slug" do
     @simple.update_attributes :name => 'new name'
     assert_equal 'new-name', @simple.slug
     assert_equal @simple, Simple.find('new-name')
@@ -26,7 +26,7 @@ class RecordsTest < ActiveSupport::TestCase
     assert_equal @translatable, Translatable.find('new-translatable-name')
   end
 
-  test 'should not alter direct assigned slug' do
+  test "should not alter direct assigned slug" do
     @simple.update_attributes :slug => 'direct slug'
     assert_equal 'direct slug', @simple.slug
     assert_equal @simple, Simple.find('direct slug')
@@ -35,7 +35,7 @@ class RecordsTest < ActiveSupport::TestCase
     assert_equal @translatable, Translatable.find('translatable direct slug')
   end
 
-  test 'should assign index for same slugs' do
+  test "should assign index for same slugs" do
     first = Simple.create(:name => 'same', :age => 34)
     assert_equal 'same', first.slug
     second = Simple.create(:name => 'same', :age => 45)

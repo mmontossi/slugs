@@ -97,13 +97,13 @@ module RailsSlugs
               joins(
                 "INNER JOIN #{t.table_name} t ON t.#{t.foreign_key} = #{table_name}.#{t.active_record_primary_key}"
               ).where(
-                "t.slug = '#{id}' AND t.locale = '#{::I18n.locale.to_s}'"
+                "t.slug = '#{id}' AND t.locale = '#{I18n.locale.to_s}'"
               ).readonly(false).first
             end
             
             def exists_by_slug(id)
               t = reflect_on_association(:translations)
-              joins(:translations).exists?(t.table_name.to_sym => {:slug => id, :locale => ::I18n.locale})
+              joins(:translations).exists?(t.table_name.to_sym => {:slug => id, :locale => I18n.locale})
             end
                       
           end
@@ -112,7 +112,7 @@ module RailsSlugs
         protected
 
         def change_locale(locale)
-          ::I18n.locale = locale
+          I18n.locale = locale
           with_locale locale
         end
 
@@ -121,7 +121,7 @@ module RailsSlugs
           r = self.class.joins(
             "INNER JOIN #{t.table_name} t ON t.#{t.foreign_key} = #{self.class.table_name}.#{t.active_record_primary_key}"
           ).where(
-            (new_record? ? '' : "#{self.class.table_name}.id != #{id} AND ") + "(t.slug = '#{slug}' OR t.slug LIKE '#{slug}-_') AND t.locale = '#{::I18n.locale.to_s}'"
+            (new_record? ? '' : "#{self.class.table_name}.id != #{id} AND ") + "(t.slug = '#{slug}' OR t.slug LIKE '#{slug}-_') AND t.locale = '#{I18n.locale.to_s}'"
           ).order(
             't.slug DESC'
           ).first
@@ -130,7 +130,7 @@ module RailsSlugs
 
         def generate_slugs
           locale = current_locale
-          ::I18n.available_locales.each do |locale|
+          I18n.available_locales.each do |locale|
             change_locale locale
             assign_slug
           end
