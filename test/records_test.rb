@@ -4,6 +4,12 @@ class RecordsTest < ActiveSupport::TestCase
   
   setup :create_records
 
+  test "should not break validation" do
+    assert Without.new.valid?
+    assert Simple.new.valid?
+    assert Translatable.new.valid?
+  end
+
   test "should not break without models" do
     assert_equal 'name', @without.name
     assert_equal @without, Without.find('1')

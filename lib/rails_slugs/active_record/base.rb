@@ -39,22 +39,25 @@ module RailsSlugs
             options = self.class.slug
             case options
             when Symbol      
-              value = send(options).parameterize
+              value = send(options)
             when Array                     
-              value = options.each.map{|p|send(p)}.join(' ').parameterize     
+              value = options.each.map{|p|send(p)}.join(' ')
             when Proc                       
-              value = options.call(self).parameterize
+              value = options.call(self)
             end
-            previous_value = previous_slug?(value)
-            if previous_value.present?
-              index = Regexp.new(value + '-(\d+)$').match(previous_value)
-              if index.present?
-                value << "-#{index[1].to_i + 1}"
-              else
-                value << '-1'
+            if value.present?
+              value = value.parameterize
+              previous_value = previous_slug?(value)
+              if previous_value.present?
+                index = Regexp.new(value + '-(\d+)$').match(previous_value)
+                if index.present?
+                  value << "-#{index[1].to_i + 1}"
+                else
+                  value << '-1'
+                end
               end
+              self.slug = value
             end
-            self.slug = value
           end
         end
 
