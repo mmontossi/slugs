@@ -3,7 +3,7 @@ module RailsSlugs
 
     initializer 'rails_slugs' do
       ::ActiveRecord::Relation.send :include, RailsSlugs::ActiveRecord::Relation
-      ::ActiveRecord::Base.send :extend, RailsSlugs::ActiveRecord::Base::NonSluggable
+      ::ActiveRecord::Base.send :include, RailsSlugs::ActiveRecord::Base
     end
 
   end
