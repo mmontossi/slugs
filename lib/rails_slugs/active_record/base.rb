@@ -7,7 +7,7 @@ module RailsSlugs
       end
 
       def to_param
-        self.class.sluggable? ? slug : super
+        self.class.sluggable? ? (slug_changed? ? slug_was : slug) : super
       end
 
       protected
