@@ -16,7 +16,9 @@ Then bundle:
 
 Add the column in your migration:
   t.string :slug
-  
+
+(If you are using translatable_records you need to place the column in the translation table, this has been done this way because it’s easier to maintain and your queries will be faster avoiding extra joins)  
+
 Update your db:
   rake db:migrate
 
