@@ -20,7 +20,7 @@ class RecordsTest < ActiveSupport::TestCase
     assert_equal @without, Without.find(1)
   end
 
-  test "shoud create slug" do
+  test "should create slug" do
     assert_equal 'name', @simple.slug
     assert_equal @simple, Simple.find('name')
     assert_equal 'translatable-name', @translatable.slug

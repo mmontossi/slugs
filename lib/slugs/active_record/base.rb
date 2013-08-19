@@ -13,12 +13,12 @@ module Slugs
         if slug.nil? or not slug_changed?
           options = self.class.slug
           case options
-          when Symbol      
+          when Symbol
             value = send(options)
-          when Array                     
+          when Array
             value = options.each.map{ |p| send(p) }.join(' ')
-          when Proc                       
-            value = options.call(self)
+          else
+            value = options.call(self) if options.respond_to? :call
           end
           if value.present?
             value = value.parameterize
@@ -49,8 +49,8 @@ module Slugs
           !defined?(@slug).nil? and @slug.present?
         end
         
-        def slug(*args)
-          if args.any?
+        def slug(*args, &block)
+          if block_given? or args.any?
             unless sluggable?
               if respond_to? :translatable? and translatable?
                 include Slugs::ActiveRecord::Translatable
@@ -60,7 +60,11 @@ module Slugs
                 include Slugs::ActiveRecord::NonTranslatable
                 before_validation :generate_slug
               end
-              @slug = args.size == 1 ? args[0] : args                              
+              if block_given?
+                @slug = block
+              else
+                @slug = args.size == 1 ? args[0] : args                              
+              end
             end
           end
           @slug
