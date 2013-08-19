@@ -1,7 +1,5 @@
-class Simple < ActiveRecord::Base 
-  
-  attr_accessible :name, :age, :slug
-  
+class Simple < ActiveRecord::Base
+
   slug :name
-  
+
 end

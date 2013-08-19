@@ -1,17 +1,13 @@
-=== NOTE: From version 1.0.5 and above a index it appended if a new slug it's equal to a old one
+{<img src="https://codeclimate.com/github/mattways/slugs.png" />}[https://codeclimate.com/github/mattways/slugs] {<img src="https://secure.travis-ci.org/mattways/slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mattways/slugs] {<img src="https://gemnasium.com/mattways/slugs.png" alt="Dependency Status" />}[https://gemnasium.com/mattways/slugs]
 
----
-
-{<img src="https://codeclimate.com/github/mattways/rails_slugs.png" />}[https://codeclimate.com/github/mattways/rails_slugs] {<img src="https://secure.travis-ci.org/mattways/rails_slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mattways/rails_slugs] {<img src="https://gemnasium.com/mattways/rails_slugs.png" alt="Dependency Status" />}[https://gemnasium.com/mattways/rails_slugs]
-
-= Rails Slugs
+= Slugs
 
 Inspired in friendly_id but more minimalistic.
 
 = Install
 
 Put this line in your Gemfile:
-  gem 'rails_slugs'
+  gem 'slugs'
   
 Then bundle:
   $ bundle
@@ -21,8 +17,6 @@ Then bundle:
 Add the column in your migration:
   t.string :slug
   
-(If you are using rails-i18n-record you need to place the column in the translation table, this has been done this way because it's easier to maintain and your queries will be faster avoiding extra joins)
-
 Update your db:
   rake db:migrate
 
@@ -34,5 +28,5 @@ If you want to use the value of one field:
 To concatenate the value of multiple fields:
   slug :prop1, :prop2, :prop3
   
-Or if you need a very custom slug:
+Or if you need a very custom slug you can use a lambda, proc or block:
   slug proc { |record| "#{record.prop}-custom" }

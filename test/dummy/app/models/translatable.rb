@@ -1,8 +1,7 @@
-class Translatable < ActiveRecord::Base 
-  
-  attr_accessible :dummy, :name, :age, :slug
+class Translatable < ActiveRecord::Base
+
   attr_translatable :name, :age
-  
+
   slug :name
-  
+
 end

@@ -1,6 +1,7 @@
-module RailsSlugs
+module Slugs
   module ActiveRecord
     module Relation
+      extend ActiveSupport::Concern
 
       def find_one(id)
         r = (sluggable? and id.is_a? String) ? find_by_slug(id) : nil
