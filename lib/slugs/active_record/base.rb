@@ -24,7 +24,7 @@ module Slugs
           if value.present? and value != slug
             previous_value = self.class.unscoped.find_previous_slug(value)
             if previous_value.present?
-              index = previous_value.math(/#{value}-([0-9]+)$/)
+              index = previous_value.match(/#{value}-([0-9]+)$/)
               if index.present?
                 value << "-#{index[1].to_i + 1}"
               else
