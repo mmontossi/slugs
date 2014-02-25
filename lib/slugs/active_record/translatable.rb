@@ -23,7 +23,7 @@ module Slugs
           joins(
             "INNER JOIN #{t.table_name} t ON t.#{t.foreign_key} = #{table_name}.#{t.active_record_primary_key}"
           ).where(
-            "(t.slug LIKE '#{slug}-_' OR t.slug = '#{slug}') AND t.locale = '#{I18n.locale}'"
+            "(t.slug LIKE '#{slug}-%' OR t.slug = '#{slug}') AND t.locale = '#{I18n.locale}'"
           ).order(
             't.slug DESC'
           ).first.try(:slug)

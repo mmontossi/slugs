@@ -11,7 +11,7 @@ module Slugs
  
         def find_previous_slug(slug)
           where(
-            "slug LIKE '#{slug}-_' OR slug = '#{slug}'"
+            "slug LIKE '#{slug}-%' OR slug = '#{slug}'"
           ).order(
             'slug DESC'
           ).first.try(:slug)
