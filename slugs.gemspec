@@ -14,8 +14,6 @@ Gem::Specification.new do |s|
   s.description = 'Inspired in friendly_id but more minimalistic.'
   s.license     = 'MIT'
 
-  s.post_install_message = 'REMEMBER TO RENAME "slug" TO "has_slug" IN YOUR MODELS'
-
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
   s.test_files = Dir['test/**/*']
 

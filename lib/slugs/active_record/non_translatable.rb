@@ -14,7 +14,7 @@ module Slugs
             "slug LIKE '#{slug}-%' OR slug = '#{slug}'"
           ).order(
             'slug DESC'
-          ).first.try(:slug)
+          ).select{ |r| r.slug =~ /^#{slug}(-\d+)?$/ }.first.try(:slug)
         end
  
       end
