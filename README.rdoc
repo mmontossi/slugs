@@ -1,4 +1,8 @@
-{<img src="https://codeclimate.com/github/mattways/slugs.png" />}[https://codeclimate.com/github/mattways/slugs] {<img src="https://secure.travis-ci.org/mattways/slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/mattways/slugs] {<img src="https://gemnasium.com/mattways/slugs.png" alt="Dependency Status" />}[https://gemnasium.com/mattways/slugs]
+=== WARNING: From version 1.2.0 and above "slug" method has been renamed to "has_slug".
+
+---
+
+{<img src="https://codeclimate.com/github/museways/slugs.png" />}[https://codeclimate.com/github/museways/slugs] {<img src="https://secure.travis-ci.org/museways/slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/museways/slugs] {<img src="https://gemnasium.com/museways/slugs.png" alt="Dependency Status" />}[https://gemnasium.com/museways/slugs]
 
 = Slugs
 
@@ -22,13 +26,13 @@ Add the column in your migration:
 Update your db:
   rake db:migrate
 
-Call the slug method in your model:
+Call the has_slug method in your model:
 
 If you want to use the value of one field:
-  slug :prop
+  has_slug :prop
   
 To concatenate the value of multiple fields:
-  slug :prop1, :prop2, :prop3
+  has_slug :prop1, :prop2, :prop3
   
 Or if you need a very custom slug you can use a lambda, proc or block:
-  slug proc { |record| "#{record.prop}-custom" }
+  has_slug proc { |record| "#{record.prop}-custom" }

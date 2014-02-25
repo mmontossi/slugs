@@ -7,17 +7,21 @@ require 'slugs/version'
 Gem::Specification.new do |s|
   s.name        = 'slugs'
   s.version     = Slugs::VERSION
-  s.authors     = ['Mattways']
-  s.email       = ['contact@mattways.com']
-  s.homepage    = 'https://github.com/mattways/slugs'
+  s.authors     = ['Museways']
+  s.email       = ['contact@museways.com']
+  s.homepage    = 'https://github.com/museways/slugs'
   s.summary     = 'Slugs for Rails.'
   s.description = 'Inspired in friendly_id but more minimalistic.'
   s.license     = 'MIT'
+
+  s.post_install_message = 'REMEMBER TO RENAME "slug" TO "has_slug" IN YOUR MODELS'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']
   s.test_files = Dir['test/**/*']
 
   s.add_dependency 'rails', (ENV['RAILS_VERSION'] ? "~> #{ENV['RAILS_VERSION']}" : '>= 3.0.0')
+  
+  s.add_development_dependency 'translatable_records'
 
   if RUBY_PLATFORM == 'java'
     s.add_development_dependency 'activerecord-jdbcsqlite3-adapter'

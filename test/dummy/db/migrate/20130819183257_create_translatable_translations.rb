@@ -4,8 +4,8 @@ class CreateTranslatableTranslations < ActiveRecord::Migration
       t.integer :translatable_id
       t.string :locale
       t.string :name
-      t.string :slug
       t.integer :age
+      t.string :slug
 
       t.timestamps 
     end

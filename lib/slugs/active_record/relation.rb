@@ -4,13 +4,11 @@ module Slugs
       extend ActiveSupport::Concern
 
       def find_one(id)
-        r = (sluggable? and id.is_a? String) ? find_by_slug(id) : nil
-        r.nil? ? super : r
+        (sluggable? and id.is_a? String) ? (find_by_slug(id) || super) : super
       end
 
-      def exists?(id = false)
-        r = (sluggable? and id.is_a? String) ? exists_by_slug(id) : nil
-        r.nil? ? super : r
+      def exists?(id=false)
+        (sluggable? and id.is_a? String) ? (exists_by_slug(id) || super) : super
       end
 
     end

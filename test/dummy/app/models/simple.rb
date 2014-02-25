@@ -1,5 +1,5 @@
 class Simple < ActiveRecord::Base
 
-  slug :name
+  has_slug :name
 
 end

@@ -3,7 +3,8 @@ require File.expand_path('../boot', __FILE__)
 require 'rails/all'
 
 Bundler.require(*Rails.groups)
-require "slugs"
+require 'slugs'
+require 'translatable_records'
 
 module Dummy
   class Application < Rails::Application
@@ -20,4 +21,3 @@ module Dummy
     # config.i18n.default_locale = :de
   end
 end
-

@@ -25,8 +25,8 @@ ActiveRecord::Schema.define(version: 20130819183257) do
     t.integer  "translatable_id"
     t.string   "locale"
     t.string   "name"
-    t.string   "slug"
     t.integer  "age"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -35,7 +35,9 @@ ActiveRecord::Schema.define(version: 20130819183257) do
   add_index "translatable_translations", ["translatable_id"], name: "index_translatable_translations_on_translatable_id"
 
   create_table "translatables", force: true do |t|
-    t.string   "dummy"
+    t.string   "name"
+    t.integer  "age"
+    t.string   "slug"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
