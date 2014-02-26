@@ -25,7 +25,7 @@ module Slugs
           ).where(
             "(t.slug LIKE '#{slug}-%' OR t.slug = '#{slug}') AND t.locale = '#{I18n.locale}'"
           ).order(
-            't.slug DESC'
+            'LENGTH(t.slug) DESC, t.slug DESC'
           ).select{ |r| r.slug =~ /^#{slug}(-\d+)?$/ }.first.try(:slug)
         end
 

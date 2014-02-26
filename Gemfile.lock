@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    slugs (1.2.2)
+    slugs (1.2.3)
       rails (>= 3.0.0)
 
 GEM

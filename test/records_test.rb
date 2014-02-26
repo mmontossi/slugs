@@ -53,29 +53,35 @@ class RecordsTest < ActiveSupport::TestCase
   test "should assign index for same slugs" do
     first = Simple.create(name: 'same', age: 34)
     assert_equal 'same', first.slug
+
+    20.times { Simple.create(name: 'same', age: 10) }
+
     second = Simple.create(name: 'same', age: 45)
-    assert_equal 'same-1', second.slug
+    assert_equal 'same-21', second.slug
     third = Simple.create(name: 'same', age: 234)
-    assert_equal 'same-2', third.slug
+    assert_equal 'same-22', third.slug
 
     first.update name: 'same'
     assert_equal 'same', first.slug
     second.update name: 'same'
-    assert_equal 'same-3', second.slug
+    assert_equal 'same-23', second.slug
     third.update name: 'other'
     assert_equal 'other', third.slug
 
     first = Translatable.create(name: 'same', age: 34)
     assert_equal 'same', first.slug
+
+    20.times { Translatable.create(name: 'same', age: 10) }
+
     second = Translatable.create(name: 'same', age: 45)
-    assert_equal 'same-1', second.slug
+    assert_equal 'same-21', second.slug
     third = Translatable.create(name: 'same', age: 234)
-    assert_equal 'same-2', third.slug
+    assert_equal 'same-22', third.slug
 
     first.update name: 'same'
     assert_equal 'same', first.slug
     second.update name: 'same'
-    assert_equal 'same-3', second.slug
+    assert_equal 'same-23', second.slug
     third.update name: 'other'
     assert_equal 'other', third.slug
   end

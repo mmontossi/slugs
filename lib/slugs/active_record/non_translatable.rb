@@ -13,7 +13,7 @@ module Slugs
           where(
             "slug LIKE '#{slug}-%' OR slug = '#{slug}'"
           ).order(
-            'slug DESC'
+            'LENGTH(slug) DESC, slug DESC'
           ).select{ |r| r.slug =~ /^#{slug}(-\d+)?$/ }.first.try(:slug)
         end
  
