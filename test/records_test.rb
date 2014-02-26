@@ -54,6 +54,7 @@ class RecordsTest < ActiveSupport::TestCase
     first = Simple.create(name: 'same', age: 34)
     assert_equal 'same', first.slug
 
+    Simple.create(name: 'same-larger', age: 10) }
     20.times { Simple.create(name: 'same', age: 10) }
 
     second = Simple.create(name: 'same', age: 45)
@@ -71,6 +72,7 @@ class RecordsTest < ActiveSupport::TestCase
     first = Translatable.create(name: 'same', age: 34)
     assert_equal 'same', first.slug
 
+    Simple.create(name: 'same-larger', age: 10) }
     20.times { Translatable.create(name: 'same', age: 10) }
 
     second = Translatable.create(name: 'same', age: 45)
