@@ -9,11 +9,11 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended that you check this file into your version control system.
+# It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130819183257) do
+ActiveRecord::Schema.define(:version => 20130819183257) do
 
-  create_table "simples", force: true do |t|
+  create_table "simples", :force => true do |t|
     t.string   "name"
     t.integer  "age"
     t.string   "slug"
@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 20130819183257) do
     t.datetime "updated_at"
   end
 
-  create_table "translatable_translations", force: true do |t|
+  create_table "translatable_translations", :force => true do |t|
     t.integer  "translatable_id"
     t.string   "locale"
     t.string   "name"
@@ -31,18 +31,15 @@ ActiveRecord::Schema.define(version: 20130819183257) do
     t.datetime "updated_at"
   end
 
-  add_index "translatable_translations", ["locale"], name: "index_translatable_translations_on_locale"
-  add_index "translatable_translations", ["translatable_id"], name: "index_translatable_translations_on_translatable_id"
+  add_index "translatable_translations", ["locale"], :name => "index_translatable_translations_on_locale"
+  add_index "translatable_translations", ["translatable_id"], :name => "index_translatable_translations_on_translatable_id"
 
-  create_table "translatables", force: true do |t|
-    t.string   "name"
-    t.integer  "age"
-    t.string   "slug"
+  create_table "translatables", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "withouts", force: true do |t|
+  create_table "withouts", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
