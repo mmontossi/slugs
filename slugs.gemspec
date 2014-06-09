@@ -21,6 +21,8 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'rails', (ENV['RAILS_VERSION'] ? "~> #{ENV['RAILS_VERSION']}" : ['>= 3.1.0', '~> 4.1'])
 
+  s.add_development_dependency 'translatable_records'
+
   if RUBY_PLATFORM == 'java'
     s.add_development_dependency 'activerecord-jdbcsqlite3-adapter', '~> 1.3'
     s.add_development_dependency 'jruby-openssl', '~> 0.9'

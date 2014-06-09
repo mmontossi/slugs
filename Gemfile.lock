@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    slugs (1.2.3)
+    slugs (1.2.4)
       rails (~> 4.1, >= 3.1.0)
 
 GEM
@@ -78,6 +78,8 @@ GEM
     thor (0.19.1)
     thread_safe (0.3.4)
     tilt (1.4.1)
+    translatable_records (1.0.6)
+      rails (>= 3.0.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -90,3 +92,4 @@ PLATFORMS
 DEPENDENCIES
   slugs!
   sqlite3 (~> 1.3)
+  translatable_records
