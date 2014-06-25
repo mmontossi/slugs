@@ -38,6 +38,9 @@ If you need a very custom slug you can use a lambda, proc or block:
 Then the find method of your models will accept slugs and ids transparently:
   Model.find 'slug'
 
+All the path and urls helpers will start using the slug by default if you want to force the id:
+  model_path(instance.id)
+
 = Credits
 
 This gem is maintained and funded by museways[http://museways.com].
