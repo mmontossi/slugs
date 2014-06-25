@@ -14,13 +14,17 @@ Then bundle:
 
 = Configuration
 
-Add the column in your migration:
+Add the slug column to the tables of the models you want to have slugs:
   t.string :slug
 
 Update your db:
   rake db:migrate
 
-Use has_slug in your model to define what the slug will be:
+NOTE: If you are using translatable_records you need to place the column in the translations table.
+
+= Usage
+
+Use has_slug in your models to define what the slug will be:
 
 If you want to use the value of one field:
   has_slug :prop
@@ -31,11 +35,7 @@ To concatenate the value of multiple fields:
 If you need a very custom slug you can use a lambda, proc or block:
   has_slug proc { |record| "#{record.prop}-custom" }
 
-NOTE: If you are using translatable_records you need to place the column in the translations table.
-
-= Usage
-
-The find method of your models will accept slugs and ids transparently:
+Then the find method of your models will accept slugs and ids transparently:
   Model.find 'slug'
 
 = Credits
