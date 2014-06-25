@@ -2,7 +2,7 @@ module Slugs
   module ActiveRecord 
     module Translatable
       extend ActiveSupport::Concern
- 
+
       protected
 
       def generate_slugs
@@ -37,13 +37,13 @@ module Slugs
             "t.slug = '#{id}' AND t.locale = '#{I18n.locale}'"
           ).readonly(false).first
         end
- 
+
         def exists_by_slug(id)
           t = reflect_on_association(:translations)
           joins(:translations).exists? t.table_name.to_sym => { slug: id, locale: I18n.locale }
         end
 
-      end      
+      end
     end
   end
 end

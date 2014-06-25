@@ -44,7 +44,7 @@ module Slugs
           subclass.slug = slug
           super
         end
- 
+
         def sluggable?
           slug.present?
         end
@@ -66,7 +66,7 @@ module Slugs
             end
           end
         end
- 
+
       end
     end
   end

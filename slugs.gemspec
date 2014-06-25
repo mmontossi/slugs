@@ -10,8 +10,8 @@ Gem::Specification.new do |s|
   s.authors     = ['Museways']
   s.email       = ['contact@museways.com']
   s.homepage    = 'https://github.com/museways/slugs'
-  s.summary     = 'Slugs for Rails.'
-  s.description = 'Inspired in friendly_id but more minimalistic.'
+  s.summary     = 'Slugs for rails.'
+  s.description = 'Minimalistic slugs inspired in friendly_id for rails.'
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.rdoc']

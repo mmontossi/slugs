@@ -1,38 +1,47 @@
-=== WARNING: From version 1.2.0 and above "slug" method has been renamed to "has_slug".
-
----
-
-{<img src="https://badge.fury.io/rb/slugs.png" alt="Gem Version" />}[http://badge.fury.io/rb/slugs] {<img src="https://codeclimate.com/github/museways/slugs.png" />}[https://codeclimate.com/github/museways/slugs] {<img src="https://secure.travis-ci.org/museways/slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/museways/slugs] {<img src="https://gemnasium.com/museways/slugs.png" alt="Dependency Status" />}[https://gemnasium.com/museways/slugs]
+{<img src="https://badge.fury.io/rb/slugs.png" alt="Gem Version" />}[http://badge.fury.io/rb/slugs] {<img src="https://codeclimate.com/github/museways/slugs.png" />}[https://codeclimate.com/github/museways/slugs] {<img src="https://secure.travis-ci.org/museways/slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/museways/slugs]
 
 = Slugs
 
-Inspired in friendly_id but more minimalistic.
+Minimalistic slugs inspired in friendly_id for rails.
 
 = Install
 
 Put this line in your Gemfile:
   gem 'slugs'
-  
+
 Then bundle:
   $ bundle
-  
-= Usage
+
+= Configuration
 
 Add the column in your migration:
   t.string :slug
 
-(If you are using translatable_records you need to place the column in the translation table, this has been done this way because it’s easier to maintain and your queries will be faster avoiding extra joins)  
-
 Update your db:
   rake db:migrate
 
-Call the has_slug method in your model:
+Use has_slug in your model to define what the slug will be:
 
 If you want to use the value of one field:
   has_slug :prop
-  
+
 To concatenate the value of multiple fields:
   has_slug :prop1, :prop2, :prop3
-  
-Or if you need a very custom slug you can use a lambda, proc or block:
+
+If you need a very custom slug you can use a lambda, proc or block:
   has_slug proc { |record| "#{record.prop}-custom" }
+
+NOTE: If you are using translatable_records you need to place the column in the translations table.
+
+= Usage
+
+The find method of your models will accept slugs and ids transparently:
+  Model.find 'slug'
+
+= Credits
+
+This gem is maintained and funded by museways[http://museways.com].
+
+= License
+
+It is free software, and may be redistributed under the terms specified in the MIT-LICENSE file.
