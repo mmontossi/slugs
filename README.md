@@ -12,8 +12,9 @@ gem 'slugs'
 ```
 
 Then bundle:
-
-    $ bundle
+```
+$ bundle
+```
 
 ## Configuration
 
@@ -23,8 +24,9 @@ t.string :slug
 ```
 
 Update your db:
-
-    rake db:migrate
+```
+rake db:migrate
+```
 
 NOTE: If you are using translatable_records you need to place the column in the translations table.
 
