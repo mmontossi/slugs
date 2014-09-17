@@ -1,50 +1,66 @@
-{<img src="https://badge.fury.io/rb/slugs.png" alt="Gem Version" />}[http://badge.fury.io/rb/slugs] {<img src="https://codeclimate.com/github/museways/slugs.png" />}[https://codeclimate.com/github/museways/slugs] {<img src="https://secure.travis-ci.org/museways/slugs.png?branch=master" alt="Build Status" />}[https://travis-ci.org/museways/slugs]
+[![Gem Version](https://badge.fury.io/rb/slugs.svg)](http://badge.fury.io/rb/slugs) [![Code Climate](https://codeclimate.com/github/museways/slugs/badges/gpa.svg)](https://codeclimate.com/github/museways/slugs) [![Build Status](https://travis-ci.org/museways/slugs.svg?branch=master)](https://travis-ci.org/museways/slugs)
 
-= Slugs
+# Slugs
 
 Minimalistic slugs inspired in friendly_id for rails.
 
-= Install
+## Install
 
 Put this line in your Gemfile:
-  gem 'slugs'
+```ruby
+gem 'slugs'
+```
 
 Then bundle:
-  $ bundle
 
-= Configuration
+    $ bundle
+
+## Configuration
 
 Add the slug column to the tables of the models you want to have slugs:
-  t.string :slug
+```ruby
+t.string :slug
+```
 
 Update your db:
-  rake db:migrate
+
+    rake db:migrate
 
 NOTE: If you are using translatable_records you need to place the column in the translations table.
 
-= Usage
+## Usage
 
 Use has_slug in your models to define what the slug will be:
 
 If you want to use the value of one field:
-  has_slug :prop
+```ruby
+has_slug :prop
+```
 
 To concatenate the value of multiple fields:
-  has_slug :prop1, :prop2, :prop3
+```ruby
+has_slug :prop1, :prop2, :prop3
+```
 
 If you need a very custom slug you can use a lambda, proc or block:
-  has_slug proc { |record| "#{record.prop}-custom" }
+```ruby
+has_slug proc { |record| "#{record.prop}-custom" }
+```
 
 Then the find method of your models will accept slugs and ids transparently:
-  Model.find 'slug'
+```ruby
+Model.find 'slug'
+```
 
 All the path and url helpers will start using the slug by default if you want to force the id:
-  model_path(instance.id)
+```ruby
+model_path(instance.id)
+```
 
-= Credits
+## Credits
 
-This gem is maintained and funded by museways[http://museways.com].
+This gem is maintained and funded by [museways](http://museways.com).
 
-= License
+## License
 
 It is free software, and may be redistributed under the terms specified in the MIT-LICENSE file.

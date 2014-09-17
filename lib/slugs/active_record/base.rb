@@ -62,7 +62,7 @@ module Slugs
             if block_given?
               self.slug = block
             else
-              self.slug = args.size == 1 ? args[0] : args                              
+              self.slug = args.size == 1 ? args[0] : args
             end
           end
         end
