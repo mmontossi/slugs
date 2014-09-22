@@ -2,19 +2,19 @@ require 'test_helper'
 
 class RecordsTest < ActiveSupport::TestCase
 
-  test 'not break validation' do
+  test 'validation' do
     assert Without.new.valid?
     assert Simple.new.valid?
     assert Translatable.new.valid?
   end
 
-  test 'not break models' do
+  test 'models' do
     assert_equal 'name', without.name
     assert_equal without, Without.find('1')
     assert_equal without, Without.find(1)
   end
 
-  test 'create slug' do
+  test 'slug creation' do
     assert_equal 'name', simple.slug
     assert_equal simple, Simple.find('name')
 
@@ -22,7 +22,7 @@ class RecordsTest < ActiveSupport::TestCase
     assert_equal translatable, Translatable.find('translatable-name')
   end
 
-  test 'update slug' do
+  test 'slug edition' do
     simple.name = 'new name'
     simple.save!
     assert_equal 'new-name', simple.slug
@@ -34,7 +34,7 @@ class RecordsTest < ActiveSupport::TestCase
     assert_equal translatable, Translatable.find('new-translatable-name')
   end
 
-  test 'not alter direct assigned slug' do
+  test 'direct assigned slug' do
     simple.slug = 'direct slug'
     simple.save!
     assert_equal 'direct slug', simple.slug
@@ -46,7 +46,7 @@ class RecordsTest < ActiveSupport::TestCase
     assert_equal translatable, Translatable.find('translatable direct slug')
   end
 
-  test 'records not be readonly' do
+  test 'not readonly records' do
     Simple.create! name: 'editable'
     assert !Simple.find('editable').readonly?
 
@@ -54,7 +54,7 @@ class RecordsTest < ActiveSupport::TestCase
     assert !Translatable.find('editable').readonly?
   end
 
-  test 'assign index for same slugs' do
+  test 'index assignment to equal slugs' do
     first = Simple.create!(name: 'same', age: 34)
     assert_equal 'same', first.slug
 
