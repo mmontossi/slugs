@@ -1,4 +1,4 @@
-[![Gem Version](https://badge.fury.io/rb/slugs.svg)](http://badge.fury.io/rb/slugs) [![Code Climate](https://codeclimate.com/github/museways/slugs/badges/gpa.svg)](https://codeclimate.com/github/museways/slugs) [![Build Status](https://travis-ci.org/museways/slugs.svg?branch=master)](https://travis-ci.org/museways/slugs)
+[![Gem Version](https://badge.fury.io/rb/slugs.svg)](http://badge.fury.io/rb/slugs) [![Code Climate](https://codeclimate.com/github/museways/slugs/badges/gpa.svg)](https://codeclimate.com/github/museways/slugs) [![Build Status](https://travis-ci.org/museways/slugs.svg?branch=master)](https://travis-ci.org/museways/slugs) [![Dependency Status](https://gemnasium.com/museways/slugs.svg)](https://gemnasium.com/museways/slugs)
 
 # Slugs
 
