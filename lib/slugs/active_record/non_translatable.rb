@@ -1,5 +1,5 @@
 module Slugs
-  module ActiveRecord 
+  module ActiveRecord
     module NonTranslatable
       extend ActiveSupport::Concern
       module ClassMethods
@@ -10,7 +10,7 @@ module Slugs
 
         def find_previous_slug(slug)
           where(
-            "slug LIKE '#{slug}-%' OR slug = '#{slug}'"
+            'slug LIKE ? OR slug = ?', "#{slug}-%", slug
           ).order(
             'LENGTH(slug) DESC, slug DESC'
           ).map(&:slug).select{ |r| r =~ /^#{slug}(-\d+)?$/ }.first

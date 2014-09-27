@@ -1,5 +1,5 @@
 module Slugs
-  module ActiveRecord 
+  module ActiveRecord
     module Translatable
       extend ActiveSupport::Concern
 
@@ -23,7 +23,7 @@ module Slugs
           joins(
             "INNER JOIN #{t.table_name} t ON t.#{t.foreign_key} = #{table_name}.#{t.active_record_primary_key}"
           ).where(
-            "(t.slug LIKE '#{slug}-%' OR t.slug = '#{slug}') AND t.locale = '#{I18n.locale}'"
+            "(t.slug LIKE ? OR t.slug = ?) AND t.locale = ?", "#{slug}-%", slug, I18n.locale
           ).order(
             'LENGTH(t.slug) DESC, t.slug DESC'
           ).map(&:slug).select{ |r| r =~ /^#{slug}(-\d+)?$/ }.first
@@ -34,7 +34,7 @@ module Slugs
           joins(
             "INNER JOIN #{t.table_name} t ON t.#{t.foreign_key} = #{table_name}.#{t.active_record_primary_key}"
           ).where(
-            "t.slug = '#{id}' AND t.locale = '#{I18n.locale}'"
+            "t.slug = ? AND t.locale = ?", id, I18n.locale
           ).readonly(false).first
         end
 
