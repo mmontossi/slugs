@@ -67,6 +67,7 @@ module Slugs
               include Slugs::ActiveRecord::NonTranslatable
               before_validation :generate_slug
             end
+            include Slugs::ActiveRecord::Finders
             if block_given?
               self.slug = block
             else

@@ -16,42 +16,42 @@ class RecordsTest < ActiveSupport::TestCase
 
   test 'slug creation' do
     assert_equal 'name', simple.slug
-    assert_equal simple, Simple.find_by_slug('name')
+    assert_equal simple, Simple.slugged.find('name')
 
     assert_equal 'translatable-name', translatable.slug
-    assert_equal translatable, Translatable.find_by_slug('translatable-name')
+    assert_equal translatable, Translatable.slugged.find('translatable-name')
   end
 
   test 'slug edition' do
     simple.name = 'new name'
     simple.save!
     assert_equal 'new-name', simple.slug
-    assert_equal simple, Simple.find_by_slug('new-name')
+    assert_equal simple, Simple.slugged.find('new-name')
 
     translatable.name = 'new translatable name'
     translatable.save!
     assert_equal 'new-translatable-name', translatable.slug
-    assert_equal translatable, Translatable.find_by_slug('new-translatable-name')
+    assert_equal translatable, Translatable.slugged.find('new-translatable-name')
   end
 
   test 'direct assigned slug' do
     simple.slug = 'direct slug'
     simple.save!
     assert_equal 'direct slug', simple.slug
-    assert_equal simple, Simple.find_by_slug('direct slug')
+    assert_equal simple, Simple.slugged.find('direct slug')
 
     translatable.slug = 'translatable direct slug'
     translatable.save!
     assert_equal 'translatable direct slug', translatable.slug
-    assert_equal translatable, Translatable.find_by_slug('translatable direct slug')
+    assert_equal translatable, Translatable.slugged.find('translatable direct slug')
   end
 
   test 'not readonly records' do
     Simple.create! name: 'editable'
-    assert !Simple.find_by_slug('editable').readonly?
+    assert !Simple.slugged.find('editable').readonly?
 
     Translatable.create! name: 'editable'
-    assert !Translatable.find_by_slug('editable').readonly?
+    assert !Translatable.slugged.find('editable').readonly?
   end
 
   test 'index assignment to equal slugs' do

@@ -51,7 +51,7 @@ has_slug proc { |record| "#{record.prop}-custom" }
 
 To find a record by slug:
 ```ruby
-Model.find_by_slug 'slug'
+Model.slugged.find 'slug'
 ```
 
 NOTE: All the path and url helpers will start using the slug by default.
