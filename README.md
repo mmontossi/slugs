@@ -49,15 +49,12 @@ If you need a very custom slug you can use a lambda, proc or block:
 has_slug proc { |record| "#{record.prop}-custom" }
 ```
 
-Then the find method of your models will accept slugs and ids transparently:
+To find a record by slug:
 ```ruby
-Model.find 'slug'
+Model.find_by_slug 'slug'
 ```
 
-All the path and url helpers will start using the slug by default if you want to force the id:
-```ruby
-model_path(instance.id)
-```
+NOTE: All the path and url helpers will start using the slug by default.
 
 ## Credits
 

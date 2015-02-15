@@ -4,7 +4,15 @@ module Slugs
       extend ActiveSupport::Concern
 
       def to_param
-        self.class.sluggable? ? (slug_changed? ? slug_was : slug) : super
+        if self.class.sluggable?
+          if slug_changed?
+            slug_was
+          else
+            slug
+          end
+        else
+          super
+        end
       end
 
       protected
@@ -51,7 +59,7 @@ module Slugs
 
         def has_slug(*args, &block)
           unless sluggable?
-            if respond_to? :translatable? and translatable?
+            if try(:translatable?)
               include Slugs::ActiveRecord::Translatable
               attr_translatable :slug
               before_validation :generate_slugs

@@ -3,7 +3,6 @@ module Slugs
 
     initializer 'slugs' do
       ::ActiveRecord::Base.send :include, Slugs::ActiveRecord::Base
-      ::ActiveRecord::Relation.send :include, Slugs::ActiveRecord::Relation
     end
 
   end

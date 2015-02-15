@@ -38,7 +38,7 @@ module Slugs
           ).readonly(false).first
         end
 
-        def exists_by_slug(id)
+        def exists_by_slug?(id)
           t = reflect_on_association(:translations)
           joins(:translations).exists? t.table_name.to_sym => { slug: id, locale: I18n.locale }
         end
