@@ -7,9 +7,9 @@ require 'slugs/version'
 Gem::Specification.new do |s|
   s.name        = 'slugs'
   s.version     = Slugs::VERSION
-  s.authors     = ['Museways']
-  s.email       = ['contact@museways.com']
-  s.homepage    = 'https://github.com/museways/slugs'
+  s.authors     = ['mmontossi']
+  s.email       = ['mmontossi@buyin.io']
+  s.homepage    = 'https://github.com/mmontossi/slugs'
   s.summary     = 'Slugs for rails.'
   s.description = 'Minimalistic slugs inspired in friendly_id for rails.'
   s.license     = 'MIT'
