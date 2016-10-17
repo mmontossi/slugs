@@ -1,6 +1,6 @@
 [![Gem Version](https://badge.fury.io/rb/slugs.svg)](http://badge.fury.io/rb/slugs)
 [![Code Climate](https://codeclimate.com/github/mmontossi/slugs/badges/gpa.svg)](https://codeclimate.com/github/mmontossi/slugs)
-[![Build Status](https://travis-ci.org/mmontossi/slugs.svg)](https://travis-ci.org/mmontossis/slugs)
+[![Build Status](https://travis-ci.org/mmontossi/slugs.svg)](https://travis-ci.org/mmontossi/slugs)
 [![Dependency Status](https://gemnasium.com/mmontossi/slugs.svg)](https://gemnasium.com/mmontossi/slugs)
 
 # Slugs
