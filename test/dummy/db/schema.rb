@@ -9,40 +9,35 @@
 # from scratch. The latter is a flawed and unsustainable approach (the more migrations
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
-# It's strongly recommended to check this file into your version control system.
+# It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130819183257) do
+ActiveRecord::Schema.define(version: 20161016174225) do
 
-  create_table "simples", :force => true do |t|
-    t.string   "name"
-    t.integer  "age"
-    t.string   "slug"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "categories", force: :cascade do |t|
+    t.string  "name"
+    t.integer "shop_id"
+    t.string  "slug"
   end
 
-  create_table "translatable_translations", :force => true do |t|
-    t.integer  "translatable_id"
-    t.string   "locale"
-    t.string   "name"
-    t.integer  "age"
-    t.string   "slug"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "products", force: :cascade do |t|
+    t.string  "name"
+    t.integer "shop_id"
+    t.integer "category_id"
+    t.string  "slug"
   end
 
-  add_index "translatable_translations", ["locale"], :name => "index_translatable_translations_on_locale"
-  add_index "translatable_translations", ["translatable_id"], :name => "index_translatable_translations_on_translatable_id"
-
-  create_table "translatables", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "shops", force: :cascade do |t|
+    t.string "name"
+    t.string "slug"
   end
 
-  create_table "withouts", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "users", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "slug"
   end
 
 end
