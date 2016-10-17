@@ -4,14 +4,16 @@ module Slugs
       module OptimizedUrlHelper
 
         def parameterize_args(args)
-          params = {}
           parameterized_args = args.map do |arg|
             Slugs.parameterize arg, @options
           end
-          @required_parts.zip(parameterized_args) do |key, value|
-            params[key] = value
+          if Rails::VERSION::MAJOR == 4 && Rails::VERSION::MINOR >= 2
+            params = {}
+            @required_parts.zip(parameterized_args) { |k,v| params[k] = v }
+            params
+          else
+            @required_parts.zip parameterized_args
           end
-          params
         end
 
       end

@@ -28,7 +28,7 @@ module Slugs
         scope = { attribute => send(attribute) }
       when Array
         attributes = options[:scope]
-        scope = attributes.map{ |attribute| [attribute, send(attribute)] }.to_h
+        scope = attributes.map{ |a| [a, send(a)] }.to_h
       end
       if self.class.where(scope).where(slug: slug).where.not(id: id).any?
         update_column :slug, "#{slug}-#{id}"

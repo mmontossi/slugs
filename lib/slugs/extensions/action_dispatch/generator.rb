@@ -27,7 +27,7 @@ module Slugs
                 if name == :controller
                   value
                 elsif value.is_a?(Array)
-                  value.map{ |value| Slugs.parameterize value, options }.join('/')
+                  value.map{ |v| Slugs.parameterize v, options }.join('/')
                 else
                   Slugs.parameterize value, options
                 end
