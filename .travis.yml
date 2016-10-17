@@ -7,14 +7,8 @@ before_install:
 script:
   - bundle exec rake db:create db:migrate test
 env:
-  - RAILS=4.0.0 DB=mysql
-  - RAILS=4.1.0 DB=mysql
   - RAILS=4.2.0 DB=mysql
-  - RAILS=4.0.0 DB=postgres
-  - RAILS=4.1.0 DB=postgres
   - RAILS=4.2.0 DB=postgres
-  - RAILS=4.0.0 DB=sqlite
-  - RAILS=4.1.0 DB=sqlite
   - RAILS=4.2.0 DB=sqlite
 rvm:
   - 2.1.0
