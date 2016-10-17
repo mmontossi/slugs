@@ -5,7 +5,7 @@
 
 # Slugs
 
-Minimalistic slugs inspired in friendly_id for rails.
+Manages slugs for records with minimal efford in rails.
 
 ## Install
 
@@ -21,6 +21,11 @@ $ bundle
 
 ## Configuration
 
+Generate the slugs configuration file:
+```
+bundle exec rails g slugs:install
+```
+
 Add the slug column to the tables of the models you want to have slugs:
 ```ruby
 t.string :slug
@@ -28,10 +33,17 @@ t.string :slug
 
 Update your db:
 ```
-rake db:migrate
+bundle exec rake db:migrate
 ```
 
-NOTE: If you are using translatable_records you need to place the column in the translations table.
+Configure the proc to decide which records will be slugged:
+```ruby
+Slugs.configure do |config|
+  config.use_slug_proc = Proc.new do |record, params|
+    params[:controller] != 'admin'
+  end
+end
+```
 
 ## Usage
 
@@ -47,17 +59,10 @@ To concatenate the value of multiple fields:
 has_slug :prop1, :prop2, :prop3
 ```
 
-If you need a very custom slug you can use a lambda, proc or block:
-```ruby
-has_slug proc { |record| "#{record.prop}-custom" }
-```
-
 To find a record by slug:
 ```ruby
-Model.slugged.find 'slug'
+Model.find_by slug: 'slug'
 ```
-
-NOTE: All the path and url helpers will start using the slug by default.
 
 ## Credits
 
