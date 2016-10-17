@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.email       = ['mmontossi@buyin.io']
   s.homepage    = 'https://github.com/mmontossi/slugs'
   s.summary     = 'Slugs for rails.'
-  s.description = 'Minimalistic slugs inspired in friendly_id for rails.'
+  s.description = 'Manages slugs for records with minimal efford in rails.'
   s.license     = 'MIT'
 
   s.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
