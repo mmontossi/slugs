@@ -11,7 +11,7 @@ Manages slugs for records with minimal efford in rails.
 
 I did this gem to:
 
-- Generalize how to control when routes will use slug param.
+- Generalize how to control when routes will use the slug param.
 - Keep old slugs active until the record is destroyed.
 - Ensure unique slugs by appending an index automatically on duplicates.
 
