@@ -11,9 +11,9 @@ Manages slugs for records with minimal efford in rails.
 
 I did this gem to:
 
-- Control when routes will use the slug or id.
-- Keep old slugs until the record is destroyed.
-- Avoid collisions by appending an index.
+- Generalize how to control when routes will use the slug.
+- Keep old slugs active until the record is destroyed.
+- Ensure unique slugs by appending an index automatically.
 
 ## Install
 
