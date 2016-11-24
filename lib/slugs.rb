@@ -1,9 +1,13 @@
+require 'generators/slugs/install_generator'
 require 'slugs/extensions/action_dispatch/generator'
 require 'slugs/extensions/action_dispatch/optimized_url_helper'
 require 'slugs/extensions/active_record/base'
+require 'slugs/extensions/active_record/finders'
+require 'slugs/slug'
 require 'slugs/concern'
 require 'slugs/configuration'
 require 'slugs/railtie'
+require 'slugs/version'
 
 module Slugs
   class << self
@@ -17,7 +21,7 @@ module Slugs
     end
 
     def parameterize(record, params)
-      if use_slug_for?(record, params)
+      if use_slug?(record, params)
         if record.slug_changed?
           record.slug_was
         else
@@ -28,9 +32,9 @@ module Slugs
       end
     end
 
-    def use_slug_for?(record, params)
-      if record.try(:sluggable?) && configuration.use_slug_proc
-        configuration.use_slug_proc.call record, params
+    def use_slug?(record, params)
+      if record.try(:sluggable?)
+        configuration.use_slug? record, params
       else
         false
       end

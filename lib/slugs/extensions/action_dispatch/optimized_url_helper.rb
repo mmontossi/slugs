@@ -2,6 +2,7 @@ module Slugs
   module Extensions
     module ActionDispatch
       module OptimizedUrlHelper
+        extend ActiveSupport::Concern
 
         private
 

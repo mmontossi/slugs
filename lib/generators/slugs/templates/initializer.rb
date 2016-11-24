@@ -1,6 +1,6 @@
 Slugs.configure do |config|
 
-  config.use_slug_proc = Proc.new do |record, params|
+  config.use_slug? do |record, params|
     # Add your code here
   end
 

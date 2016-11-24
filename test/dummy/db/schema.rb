@@ -11,33 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016174225) do
+ActiveRecord::Schema.define(version: 20161124162802) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
-    t.string  "name"
-    t.integer "shop_id"
-    t.string  "slug"
+    t.string   "name"
+    t.integer  "shop_id"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
-    t.string  "name"
-    t.integer "shop_id"
-    t.integer "category_id"
-    t.string  "slug"
+    t.string   "name"
+    t.integer  "shop_id"
+    t.integer  "category_id"
+    t.string   "slug"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
   end
 
   create_table "shops", force: :cascade do |t|
-    t.string "name"
-    t.string "slug"
+    t.string   "name"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
+  create_table "slugs", force: :cascade do |t|
+    t.integer  "sluggable_id"
+    t.string   "sluggable_type"
+    t.string   "value"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "slugs", ["sluggable_id"], name: "index_slugs_on_sluggable_id", using: :btree
+  add_index "slugs", ["sluggable_type"], name: "index_slugs_on_sluggable_type", using: :btree
+  add_index "slugs", ["value"], name: "index_slugs_on_value", using: :btree
+
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "slug"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "slug"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

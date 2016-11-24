@@ -7,6 +7,14 @@
 
 Manages slugs for records with minimal efford in rails.
 
+## Why
+
+I did this gem to:
+
+- Control when routes will use the slug or id.
+- Keep old slugs until the record is destroyed.
+- Avoid collision by appending an index.
+
 ## Install
 
 Put this line in your Gemfile:
@@ -21,47 +29,69 @@ $ bundle
 
 ## Configuration
 
-Generate the slugs configuration file:
+Run the install generator:
 ```
-bundle exec rails g slugs:install
-```
-
-Add the slug column to the tables of the models you want to have slugs:
-```ruby
-t.string :slug
+$ bundle exec rails g slugs:install
 ```
 
-Update your db:
-```
-bundle exec rake db:migrate
-```
-
-Configure the proc to decide which records will be slugged:
+Set the global settings:
 ```ruby
 Slugs.configure do |config|
-  config.use_slug_proc = Proc.new do |record, params|
+  config.use_slug? do |record, params|
     params[:controller] != 'admin'
   end
 end
 ```
 
+Add the columns to your tables:
+```ruby
+class CreateProducts < ActiveRecord::Migration
+  def change
+    create_table :products do |t|
+      t.string :name
+      t.string :slug
+      t.timestamps null: false
+    end
+  end
+end
+```
+
+Update your db:
+```
+$ bundle exec rake db:migrate
+```
+
+Define slugs in your models:
+```ruby
+class Product < ActiveRecord::Base
+  has_slug :model, :name, scope: :shop_id
+end
+```
+
 ## Usage
 
-Use has_slug in your models to define what the slug will be:
-
-If you want to use the value of one field:
+A slug will be generated every time you create/update a record:
 ```ruby
-has_slug :prop
+product = Product.create(name: 'Stratocaster', model: 'American Standar', ...)
+product.slug # => 'american-standard-stratocaster'
 ```
 
-To concatenate the value of multiple fields:
+An index will be appended if another record with the same slug is created:
 ```ruby
-has_slug :prop1, :prop2, :prop3
+product = Product.create(name: 'Stratocaster', model: 'American Standard', ...)
+product.slug # => 'american-standard-stratocaster-1'
 ```
 
-To find a record by slug:
+Every time you change a record, the slug will be updated:
 ```ruby
-Model.find_by slug: 'slug'
+product.update name: 'Strat'
+product.slug # => 'american-standard-strat'
+```
+
+Finders will start accepting slugs and remember old ones:
+```ruby
+Product.find 'american-standard-stratocaster' # => product
+Product.find 'american-standard-strat' # => product
 ```
 
 ## Credits

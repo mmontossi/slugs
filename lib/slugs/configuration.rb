@@ -1,7 +1,17 @@
 module Slugs
   class Configuration
 
-    attr_accessor :use_slug_proc
+    def use_slug?(*args, &block)
+      if block_given?
+        @use_slug = block
+      else
+        if @use_slug
+          @use_slug.call *args
+        else
+          false
+        end
+      end
+    end
 
   end
 end

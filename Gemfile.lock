@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    slugs (2.0.0)
+    slugs (2.1.0)
       rails (>= 4.2.0, < 4.3.0)
 
 GEM
@@ -62,7 +62,7 @@ GEM
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
     pg (0.19.0)
-    rack (1.6.4)
+    rack (1.6.5)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.7.1)

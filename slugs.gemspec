@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.name        = 'slugs'
   s.version     = Slugs::VERSION
   s.authors     = ['mmontossi']
-  s.email       = ['mmontossi@buyin.io']
+  s.email       = ['mmontossi@gmail.com']
   s.homepage    = 'https://github.com/mmontossi/slugs'
   s.summary     = 'Slugs for rails.'
   s.description = 'Manages slugs for records with minimal efford in rails.'

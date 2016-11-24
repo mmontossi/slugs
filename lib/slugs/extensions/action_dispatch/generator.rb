@@ -2,6 +2,7 @@ module Slugs
   module Extensions
     module ActionDispatch
       module Generator
+        extend ActiveSupport::Concern
 
         def generate
           @set.formatter.generate(

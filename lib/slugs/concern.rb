@@ -3,10 +3,9 @@ module Slugs
     extend ActiveSupport::Concern
 
     included do
-      before_create :set_slug
-      after_save :ensure_slug_uniqueness
+      has_many :slugs, as: :sluggable, class_name: 'Slugs::Slug'
+      before_save :set_slug
       validates_format_of :slug, with: /\A[a-z0-9\-]+\z/, allow_blank: true
-      validates_length_of :slug, maximum: 255, allow_blank: true
     end
 
     def sluggable?
@@ -18,10 +17,6 @@ module Slugs
     def set_slug
       options = self.class.slug
       self.slug = slice(*options[:attributes]).values.join(' ').parameterize
-    end
-
-    def ensure_slug_uniqueness
-      options = self.class.slug
       case options[:scope]
       when Symbol
         attribute = options[:scope]
@@ -30,8 +25,20 @@ module Slugs
         attributes = options[:scope]
         scope = attributes.map{ |a| [a, send(a)] }.to_h
       end
-      if self.class.where(scope).where(slug: slug).where.not(id: id).any?
-        update_column :slug, "#{slug}-#{id}"
+      relation = self.class.where(scope).where('slug ~ ?', "^#{slug}(-[0-9]+)?$")
+      if persisted?
+        relation = relation.where.not(id: id)
+      end
+      previous_slug = relation.order(slug: :desc).limit(1).pluck(:slug).first
+      if previous_slug.present?
+        if result = previous_slug.match(/^#{slug}-(\d+)$/)
+          self.slug += "-#{result[1].to_i + 1}"
+        else
+          self.slug += '-1'
+        end
+      end
+      if slug_changed?
+        slugs.build value: slug
       end
     end
 

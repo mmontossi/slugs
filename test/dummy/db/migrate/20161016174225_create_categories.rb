@@ -4,6 +4,8 @@ class CreateCategories < ActiveRecord::Migration
       t.string :name
       t.integer :shop_id
       t.string :slug
+
+      t.timestamps null: false
     end
   end
 end
