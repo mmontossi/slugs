@@ -13,7 +13,7 @@ I did this gem to:
 
 - Control when routes will use the slug or id.
 - Keep old slugs until the record is destroyed.
-- Avoid collision by appending an index.
+- Avoid collisions by appending an index.
 
 ## Install
 
