@@ -13,7 +13,7 @@ I did this gem to:
 
 - Generalize how to control when routes will use slug param.
 - Keep old slugs active until the record is destroyed.
-- Ensure unique slugs by appending an index automatically.
+- Ensure unique slugs by appending an index automatically on duplicates.
 
 ## Install
 
