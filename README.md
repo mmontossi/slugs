@@ -94,6 +94,12 @@ Product.find 'american-standard-stratocaster' # => product
 Product.find 'american-standard-strat' # => product
 ```
 
+In routes use_slug? block will be use to determine when to sluggize:
+```ruby
+admin_product_path product # => 'admin/products/34443'
+product_path product # => 'products/american-standard-strat'
+```
+
 ## Credits
 
 This gem is maintained and funded by [mmontossi](https://github.com/mmontossi).
