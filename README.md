@@ -27,7 +27,9 @@ Then bundle:
 $ bundle
 ```
 
-## Configuration
+## Usage
+
+### Configuration
 
 Run the install generator:
 ```
@@ -43,17 +45,13 @@ Slugs.configure do |config|
 end
 ```
 
-Add the columns to your tables:
-```ruby
-class CreateProducts < ActiveRecord::Migration
-  def change
-    create_table :products do |t|
-      t.string :name
-      t.string :model
-      t.string :slug
+### Definition
 
-      t.timestamps null: false
-    end
+Add the column to your tables:
+```ruby
+class AddSlug < ActiveRecord::Migration
+  def change
+    add_column :products, :slug, :string
   end
 end
 ```
@@ -70,7 +68,7 @@ class Product < ActiveRecord::Base
 end
 ```
 
-## Usage
+### Creation
 
 A slug will be generated every time you create/update a record:
 ```ruby
@@ -90,11 +88,15 @@ product.update name: 'Strat'
 product.slug # => 'american-standard-strat'
 ```
 
+### Finders
+
 Finders will start accepting slugs and remember old ones:
 ```ruby
 Product.find 'american-standard-stratocaster' # => product
 Product.find 'american-standard-strat' # => product
 ```
+
+### Routes
 
 In routes use_slug? block will be use to determine when to sluggize:
 ```ruby
