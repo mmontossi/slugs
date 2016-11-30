@@ -68,7 +68,7 @@ class Product < ActiveRecord::Base
 end
 ```
 
-### Creation
+### Generation
 
 A slug will be generated every time you create/update a record:
 ```ruby
@@ -90,7 +90,7 @@ product.slug # => 'american-standard-strat'
 
 ### Finders
 
-Finders will start accepting slugs and remember old ones:
+The find method of models will start accepting slugs and remember old ones:
 ```ruby
 Product.find 'american-standard-stratocaster' # => product
 Product.find 'american-standard-strat' # => product
@@ -98,7 +98,7 @@ Product.find 'american-standard-strat' # => product
 
 ### Routes
 
-In routes use_slug? block will be use to determine when to sluggize:
+The logic of the use_slug? block is be used to determine when to sluggize:
 ```ruby
 admin_product_path product # => 'admin/products/34443'
 product_path product # => 'products/american-standard-strat'
