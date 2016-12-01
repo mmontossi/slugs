@@ -27,9 +27,7 @@ Then bundle:
 $ bundle
 ```
 
-## Usage
-
-### Configuration
+## Configuration
 
 Run the install generator:
 ```
@@ -44,6 +42,8 @@ Slugs.configure do |config|
   end
 end
 ```
+
+## Usage
 
 ### Definition
 
