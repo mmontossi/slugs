@@ -98,7 +98,7 @@ Product.find 'american-standard-strat' # => product
 
 ### Routes
 
-The logic of the use_slug? block is be used to determine when to sluggize:
+The logic of the use_slug? block is used to determine when to sluggize:
 ```ruby
 admin_product_path product # => 'admin/products/34443'
 product_path product # => 'products/american-standard-strat'
