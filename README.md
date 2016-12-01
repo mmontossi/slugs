@@ -45,7 +45,7 @@ end
 
 ## Usage
 
-### Definition
+### Definitions
 
 Add the column to your tables:
 ```ruby
