@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RoutesTest < ActionDispatch::IntegrationTest
+class RouteTest < ActionDispatch::IntegrationTest
 
   setup do
     @shop = Shop.create(name: 'Guitar Shop')

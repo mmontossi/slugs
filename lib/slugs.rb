@@ -1,4 +1,3 @@
-require 'generators/slugs/install_generator'
 require 'slugs/extensions/action_dispatch/generator'
 require 'slugs/extensions/action_dispatch/optimized_url_helper'
 require 'slugs/extensions/active_record/base'

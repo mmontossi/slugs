@@ -1,7 +1,7 @@
 module Slugs
   class Railtie < Rails::Railtie
 
-    initializer :slugs do
+    initializer 'slugs.extensions' do
       ::ActionDispatch::Routing::RouteSet::Generator.prepend(
         Slugs::Extensions::ActionDispatch::Generator
       )

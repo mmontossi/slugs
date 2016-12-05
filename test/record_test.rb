@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class RecordsTest < ActiveSupport::TestCase
+class RecordTest < ActiveSupport::TestCase
 
   test 'finders' do
     user = User.create(first_name: 'Zakk', last_name: 'Wylde')
