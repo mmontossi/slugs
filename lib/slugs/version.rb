@@ -1,5 +1,5 @@
 module Slugs
 
-  VERSION = '2.1.0'
+  VERSION = '4.0.0.0'
 
 end
