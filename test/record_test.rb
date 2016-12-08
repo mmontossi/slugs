@@ -29,6 +29,12 @@ class RecordTest < ActiveSupport::TestCase
     assert_equal user, User.find('zakk-wylde')
     assert_equal user, User.find(user.id)
     assert_equal user, User.find(user.id.to_s)
+
+    domain = Domain.create
+    assert_nothing_raised do
+      Domain.find domain.id
+      Domain.exists? domain.id+1
+    end
   end
 
   test 'indices' do
