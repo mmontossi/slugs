@@ -19,5 +19,9 @@ module Slugs
       )
     end
 
+    rake_tasks do
+      load 'tasks/slugs.rake'
+    end
+
   end
 end

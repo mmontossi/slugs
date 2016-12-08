@@ -68,6 +68,13 @@ class Product < ActiveRecord::Base
 end
 ```
 
+### Migration
+
+If you already have values in the slug column, you can migrate those with:
+```ruby
+$ bundle exec rake slugs:migrate
+```
+
 ### Generation
 
 A slug will be generated every time you create/update a record:

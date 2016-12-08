@@ -39,5 +39,22 @@ module Slugs
       end
     end
 
+    def models
+      if Rails.configuration.cache_classes == false
+        Rails.application.eager_load!
+      end
+      ActiveRecord::Base.descendants.select do |model|
+        model.included_modules.include?(Slugs::Concern) && model.descendants.none?
+      end
+    end
+
+    def migrate
+      models.each do |model|
+        model.find_each do |record|
+          record.slugs.create value: record.slug
+        end
+      end
+    end
+
   end
 end
