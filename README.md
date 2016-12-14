@@ -80,35 +80,44 @@ $ bundle exec rake slugs:migrate
 A slug will be generated every time you create/update a record:
 ```ruby
 product = Product.create(name: 'Stratocaster', model: 'American Standar', ...)
-product.slug # => 'american-standard-stratocaster'
+product.slug
+# => 'american-standard-stratocaster'
 ```
 
 An index will be appended if another record with the same slug is created:
 ```ruby
 product = Product.create(name: 'Stratocaster', model: 'American Standard', ...)
-product.slug # => 'american-standard-stratocaster-1'
+product.slug
+# => 'american-standard-stratocaster-1'
 ```
 
 Every time you change a record, the slug will be updated:
 ```ruby
 product.update name: 'Strat'
-product.slug # => 'american-standard-strat'
+product.slug
+# => 'american-standard-strat'
 ```
 
 ### Finders
 
 The find method of models will start accepting slugs and remember old ones:
 ```ruby
-Product.find 'american-standard-stratocaster' # => product
-Product.find 'american-standard-strat' # => product
+Product.find 'american-standard-stratocaster'
+# => product
+
+Product.find 'american-standard-strat'
+# => product
 ```
 
 ### Routes
 
 The logic of the use_slug? block is used to determine when to sluggize:
 ```ruby
-admin_product_path product # => 'admin/products/34443'
-product_path product # => 'products/american-standard-strat'
+admin_product_path product
+# => 'admin/products/34443'
+
+product_path product
+# => 'products/american-standard-strat'
 ```
 
 ## Credits
