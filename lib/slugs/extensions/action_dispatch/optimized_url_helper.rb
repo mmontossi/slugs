@@ -4,14 +4,14 @@ module Slugs
       module OptimizedUrlHelper
         extend ActiveSupport::Concern
 
-        private
-
         def parameterize_args(args)
-          parameterized_args = args.map do |arg|
-            Slugs.parameterize arg, @options
-          end
           params = {}
-          @required_parts.zip(parameterized_args) { |k,v| params[k] = v }
+          @arg_size.times { |i|
+            key = @required_parts[i]
+            value = Slugs.parameterize(args[i], @options)
+            yield key if value.nil? || value.empty?
+            params[key] = value
+          }
           params
         end
 

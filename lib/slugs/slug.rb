@@ -3,7 +3,7 @@ module Slugs
 
     belongs_to :sluggable, polymorphic: true
 
-    validates_presence_of :sluggable, :value
+    validates_presence_of :value
 
   end
 end
