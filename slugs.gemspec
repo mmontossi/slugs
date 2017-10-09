@@ -8,8 +8,8 @@ Gem::Specification.new do |s|
   s.name        = 'slugs'
   s.version     = Slugs::VERSION
   s.authors     = ['mmontossi']
-  s.email       = ['mmontossi@museways.com']
-  s.homepage    = 'https://github.com/mmontossi/slugs'
+  s.email       = ['hi@museways.com']
+  s.homepage    = 'https://github.com/museways/slugs'
   s.summary     = 'Slugs for rails.'
   s.description = 'Manages slugs for records with minimal efford in rails.'
   s.license     = 'MIT'
