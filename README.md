@@ -1,7 +1,7 @@
 [![Gem Version](https://badge.fury.io/rb/slugs.svg)](http://badge.fury.io/rb/slugs)
-[![Code Climate](https://codeclimate.com/github/mmontossi/slugs/badges/gpa.svg)](https://codeclimate.com/github/mmontossi/slugs)
-[![Build Status](https://travis-ci.org/mmontossi/slugs.svg)](https://travis-ci.org/mmontossi/slugs)
-[![Dependency Status](https://gemnasium.com/mmontossi/slugs.svg)](https://gemnasium.com/mmontossi/slugs)
+[![Code Climate](https://codeclimate.com/github/museways/slugs/badges/gpa.svg)](https://codeclimate.com/github/museways/slugs)
+[![Build Status](https://travis-ci.org/museways/slugs.svg)](https://travis-ci.org/museways/slugs)
+[![Dependency Status](https://gemnasium.com/museways/slugs.svg)](https://gemnasium.com/museways/slugs)
 
 # Slugs
 
@@ -128,7 +128,7 @@ I will mainly ensure compatibility to Rails, AWS, PostgreSQL, Redis, Elasticsear
 
 ## Credits
 
-This gem is maintained and funded by [mmontossi](https://github.com/mmontossi).
+This gem is maintained and funded by [museways](https://github.com/museways).
 
 ## License
 
